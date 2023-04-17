@@ -4,7 +4,10 @@ export default function Item({ navigation, route }) {
   const { itemData } = route.params;
 
   const handleScanButton = () => {
-    navigation.navigate('Scan');
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Scan' }],
+    });
   }
   return (
     <View style={styles.container}>
