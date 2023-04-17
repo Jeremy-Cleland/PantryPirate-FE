@@ -19,7 +19,6 @@
 
 ### Testing
 
-
 ### UML
 
 ![WireFrame](/assets/pricefinderWF.png)
