@@ -22,5 +22,5 @@
 
 ### UML
 
-![WireFrame](/assets/pricefinderUML.png)
+![WireFrame](/assets/pricefinderWF.png)
 ![UML](assets/PantryPirate_UML.png)
