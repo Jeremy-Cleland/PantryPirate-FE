@@ -24,3 +24,4 @@
 
 ![WireFrame](/assets/pricefinderWF.png)
 ![UML](assets/PantryPirate_UML.png)
+![Schema](assets/PantryPirateSchema.PNG)
