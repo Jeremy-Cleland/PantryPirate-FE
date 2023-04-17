@@ -5,7 +5,8 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 export default function Scan({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [barcodeData, setBarcodeData] = useState(null);
+  const [itemData, setItemData] = useState(null);
+ 
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -17,10 +18,12 @@ export default function Scan({ navigation }) {
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
-    setBarcodeData(data);
-    alert (`Bar code with type ${type} and data ${data} has been scanned!`);
-    };
+      setScanned(true);
+      setItemData(data);
+      navigation.navigate('Item', { itemData: data });
+      
+  };
+
 
   if (hasPermission === null) {
     return <Text>Requesting for camera permission</Text>;
@@ -31,7 +34,7 @@ export default function Scan({ navigation }) {
 
   return (
     <View style={styles.container}>
-      
+
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
