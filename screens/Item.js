@@ -1,7 +1,7 @@
 import { Text, View, StyleSheet, Button } from 'react-native';
 
 export default function Item({ navigation, route }) {
-  const { itemData } = route.params;
+  const { data } = route.params;
 
   const handleScanButton = () => {
     navigation.reset({
@@ -11,7 +11,7 @@ export default function Item({ navigation, route }) {
   }
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Item: {itemData}</Text>
+      <Text style={styles.text}>Item: {data}</Text>
       <Button title="Rescan" onPress={handleScanButton} />
     </View>
   );

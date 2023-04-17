@@ -5,7 +5,6 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 export default function Scan({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [itemData, setItemData] = useState(null);
  
 
   useEffect(() => {
@@ -19,8 +18,7 @@ export default function Scan({ navigation }) {
 
   const handleBarCodeScanned = ({ type, data }) => {
       setScanned(true);
-      setItemData(data);
-      navigation.navigate('Item', { itemData: data });
+      navigation.navigate('Item', { data });
       
   };
 
