@@ -3,7 +3,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/Home';
 import Scan from './screens/Scan';
 import Item from './screens/Item';
+
 const Stack = createNativeStackNavigator();
+
+
 
 export default function App() {
   return (
