@@ -50,25 +50,6 @@ export default function HomeScreen({ navigation }) {
     );
   }
 
-
-  
-  if (!isLoggedIn) {
-    return (
-      <View style={styles.container}>
-        <Pressable style={styles.login} title="Login" onPress={handleLoginButton}>
-          <Text style={styles.loginText}>Login</Text>
-        </Pressable>
-        <Image source={image} style={{width: imageWidth , height: imageHeight, position: 'absolute', top: 70}} />
-        <Pressable style={styles.button} title="Scan" onPress={handleScanButton} >
-          <Text style={styles.buttonText}>Scan</Text>
-        </Pressable>
-        <Pressable style={styles.button} title="Scan" onPress={handleItemButton} >
-          <Text style={styles.buttonText}>Item</Text>
-        </Pressable>
-      </View>
-    );
-  }
-
   return (
     <View style={styles.container}>
       <Pressable style={styles.login} title="Logout" onPress={handleLogoutButton}>

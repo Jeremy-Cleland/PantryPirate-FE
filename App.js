@@ -3,6 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/Home';
 import Scan from './screens/Scan';
 import Item from './screens/Item';
+import MyLists from './screens/MyLists';
+// import MyPantry from './screens/MyPantry';
 import { Pressable } from 'react-native';
 
 const Stack = createNativeStackNavigator();
@@ -32,7 +34,7 @@ export default function App() {
             elevation: 3,
             backgroundColor: 'black',
             }}
-            onPress={() => navigation.navigate('Login')}
+           
             />
           ),
         })
@@ -40,6 +42,8 @@ export default function App() {
         />
         <Stack.Screen name="Scan" component={Scan} />
         <Stack.Screen name="Item" component={Item} />
+        <Stack.Screen name="MyLists" component={MyLists} />
+        {/* <Stack.Screen name="MyPantry" component={MyPantry} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

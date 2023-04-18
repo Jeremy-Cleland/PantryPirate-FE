@@ -13,6 +13,10 @@ export default function Item({ navigation, route }) {
     });
   }
 
+  const handleListButton = () => {
+    navigation.navigate('MyLists', { response });
+  }
+
   useEffect(() => {
     const getData = async () => {
       
@@ -39,6 +43,8 @@ export default function Item({ navigation, route }) {
         <Text>...Loading</Text>
       )}
       <Button title="Rescan" onPress={handleScanButton} />
+      <Button title="Add to List" onPress={handleListButton} />
+
     </View>
   );
   }
