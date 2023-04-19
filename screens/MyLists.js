@@ -35,6 +35,10 @@ const handleSelectList = async (list, item) => {
 
 }
 
+const handleEdit = (list) => {
+  navigation.navigate('EditList', { list });
+}
+
 const handleViewList = async (list) => {
  navigation.navigate('ListDetails', { list });
 }
@@ -61,7 +65,14 @@ if (!route.params) {
   return (
 <View>
   {userList && userList.map((list, idx) => {
-    return <Button key={`list-${idx}`} title={`${list.name}`} onPress={() => handleViewList(list)}/>
+    return (
+    
+    <View key={`list-${idx}`}>
+    <Button title={`${list.name}`} onPress={() => handleViewList(list)}/>
+
+    <Button title="Edit" onPress={() => handleEdit(list)}/>
+    </View>
+    )
   })}
   <Button title="Create New List" onPress={handleAddList} />
 </View>

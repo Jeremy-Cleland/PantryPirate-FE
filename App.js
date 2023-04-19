@@ -5,6 +5,8 @@ import Scan from './screens/Scan';
 import Item from './screens/Item';
 import MyLists from './screens/MyLists';
 import ListDetails from './screens/ListDetails';
+import AddList from './screens/AddList';
+import EditList from './screens/EditList';
 // import MyPantry from './screens/MyPantry';
 import { Pressable } from 'react-native';
 
@@ -45,6 +47,8 @@ export default function App() {
         <Stack.Screen name="Item" component={Item} />
         <Stack.Screen name="MyLists" component={MyLists} />
         <Stack.Screen name="ListDetails" component={ListDetails} />
+        <Stack.Screen name="AddList" component={AddList} />
+        <Stack.Screen name='EditList' component={EditList} />
         {/* <Stack.Screen name="MyPantry" component={MyPantry} /> */}
       </Stack.Navigator>
     </NavigationContainer>
