@@ -4,6 +4,7 @@ import HomeScreen from './screens/Home';
 import Scan from './screens/Scan';
 import Item from './screens/Item';
 import MyLists from './screens/MyLists';
+import ListDetails from './screens/ListDetails';
 // import MyPantry from './screens/MyPantry';
 import { Pressable } from 'react-native';
 
@@ -21,7 +22,7 @@ export default function App() {
         <Stack.Screen 
         name="Home" 
         component={HomeScreen} 
-        options={({ navigation}) => ({
+        options={({ navigation }) => ({
           headerRight: () => (
             <Pressable
             title="Login"
@@ -43,6 +44,7 @@ export default function App() {
         <Stack.Screen name="Scan" component={Scan} />
         <Stack.Screen name="Item" component={Item} />
         <Stack.Screen name="MyLists" component={MyLists} />
+        <Stack.Screen name="ListDetails" component={ListDetails} />
         {/* <Stack.Screen name="MyPantry" component={MyPantry} /> */}
       </Stack.Navigator>
     </NavigationContainer>

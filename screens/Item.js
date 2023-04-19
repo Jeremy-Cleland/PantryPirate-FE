@@ -23,7 +23,7 @@ export default function Item({ navigation, route }) {
       try {
       
         const response = await axios.get(`https://pantrypirate.onrender.com/products/${data}`);
-        console.log('response ------->>',response);
+        // console.log('response ------->>',response);
         setResponse(response.data);
       } catch (error) {
         console.log('error----->>>',error);
