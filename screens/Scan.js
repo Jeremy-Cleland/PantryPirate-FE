@@ -38,6 +38,7 @@ export default function Scan({ navigation }) {
         style={StyleSheet.absoluteFillObject}
       />
       {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+      <Button title="Back to Home" onPress={() => navigation.navigate('Home')} />
     </View>
   );
 }
