@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 
-export default function MyLists({ route }) {
+export default function MyLists({ navigation, route }) {
 const[userList, setUserList] = useState(null);
 
 
@@ -35,6 +35,14 @@ const handleSelectList = async (list, item) => {
 
 }
 
+const handleViewList = async (list) => {
+ navigation.navigate('ListDetails', { list });
+}
+
+const handleAddList = () => {
+  navigation.navigate('AddList');
+}
+
 
 if (route.params) {
   const { response } = route.params;
@@ -53,8 +61,9 @@ if (!route.params) {
   return (
 <View>
   {userList && userList.map((list, idx) => {
-    return <Button key={`list-${idx}`} title={`${list.name}`} onPress={handleViewList}/>
+    return <Button key={`list-${idx}`} title={`${list.name}`} onPress={() => handleViewList(list)}/>
   })}
+  <Button title="Create New List" onPress={handleAddList} />
 </View>
   )
 }
