@@ -2,6 +2,8 @@ import { View, Text, StyleSheet, Image, Pressable, Dimensions } from 'react-nati
 import { useState } from 'react';
 import image from '../assets/PantryPirateLogo.png';
 
+
+
 export default function HomeScreen({ navigation }) {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);

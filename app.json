@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "pantrypirate-fe",
+    "scheme": "pantrypirate-fe",
     "slug": "pantrypirate-fe",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -15,9 +16,12 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.pantrypirate.pantrypirate",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.pantrypirate.pantrypirate",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -25,6 +29,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "245d7557-9b2c-44ce-9d98-e2f3584b0857"
+      }
     }
   }
 }
