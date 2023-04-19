@@ -9,7 +9,7 @@ export default function Item({ navigation, route }) {
   const handleScanButton = () => {
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Scan' }],
+      routes: [{name: 'Home'}, { name: 'Scan' }],
     });
   }
 

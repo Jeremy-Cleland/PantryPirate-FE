@@ -24,9 +24,7 @@ export default function HomeScreen({ navigation }) {
   const handleScanButton = () => {
     navigation.navigate('Scan');
   }
-  const handleItemButton = () => {
-    navigation.navigate('Item');
-  }
+
   const screenWidth = Dimensions.get('window').width;
   const imageWidth = screenWidth * 0.9;
   const screenHeight = Dimensions.get('window').height;
@@ -42,9 +40,6 @@ export default function HomeScreen({ navigation }) {
         <Image source={image} style={{width: imageWidth , height: imageHeight, position: 'absolute', top: 70}} />
         <Pressable style={styles.button} title="Scan" onPress={handleScanButton} >
           <Text style={{color: 'white'}}>Scan</Text>
-        </Pressable>
-        <Pressable style={styles.button} title="Scan" onPress={handleItemButton} >
-          <Text style={{color: 'white'}}>Item</Text>
         </Pressable>
       </View>
     );

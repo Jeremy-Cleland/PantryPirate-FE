@@ -10,19 +10,19 @@ export default function EditList({ navigation, route }) {
   const handleUpdateSubmit = async () => {
     try {
       console.log('1 -------------')
-    let membersArr = members.split(' ').filter((member) => member !== '');
-    
-    const updatedList = {...route.params.list,  name: listName, members: [...membersArr, 'testUser'] };
-    console.log('2 -------------', updatedList)
-    await axios.put(`https://pantrypirate.onrender.com/list/${updatedList._id}`, updatedList);
-    console.log('3 -------------')
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'MyLists' }],
-    });
-  } catch (error) {
-    console.log('handleUpdateSubmit error----->>>', error)
-  }
+      let membersArr = members.split(' ').filter((member) => member !== '');
+
+      const updatedList = { ...route.params.list, name: listName, members: [...membersArr, 'testUser'] };
+      console.log('2 -------------', updatedList)
+      await axios.put(`https://pantrypirate.onrender.com/list/${updatedList._id}`, updatedList);
+      console.log('3 -------------')
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Home' }, { name: 'MyLists' }],
+      });
+    } catch (error) {
+      console.log('handleUpdateSubmit error----->>>', error)
+    }
 
   }
 
@@ -47,7 +47,9 @@ export default function EditList({ navigation, route }) {
         onChangeText={setMembers}
       />
       <Button title="Update List" onPress={handleUpdateSubmit} />
-      <Button title="Delete List" onPress={handleDeleteSubmit} />
+      {route.params.list.creator === 'testUser' &&
+        <Button title="Delete List" onPress={handleDeleteSubmit} />
+      }
     </View>
   )
 
