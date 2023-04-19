@@ -6,7 +6,7 @@ import Item from './screens/Item';
 import MyLists from './screens/MyLists';
 import ListDetails from './screens/ListDetails';
 // import MyPantry from './screens/MyPantry';
-import { Text, View, Button  } from 'react-native';
+import { Text, View, Button, StyleSheet } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
 import { useState, useEffect } from 'react';
@@ -18,10 +18,11 @@ export default function App() {
   const [token, setToken] = useState("");
   const [userInfo, setUserInfo] = useState(null);
 
-  // TODO -- still need ClientId
   const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId: '195320080095-s0qof8ubhocft58n1het8ek209tr0ek9.apps.googleusercontent.com',
     iosClientId: '195320080095-dh8hm108646qcrbjr1nbdgj3mm1sthna.apps.googleusercontent.com',
+    webClientId: '195320080095-itrdiekeuavm07rnant1jk08tib2dajf.apps.googleusercontent.com',
+    expoClientId: '195320080095-c9qn3o5jkobfn1q6iej0vk3qpbh8qnsp.apps.googleusercontent.com'
   });
 
   useEffect(() => {
@@ -70,6 +71,7 @@ export default function App() {
                   <Text style={styles.text}>{userInfo.name}</Text>
                 )}
               </View>
+
               // <Pressable
               //   title="Login"
               //   style={{
@@ -95,6 +97,22 @@ export default function App() {
         {/* <Stack.Screen name="MyPantry" component={MyPantry} /> */}
       </Stack.Navigator>
     </NavigationContainer>
+
+
+
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+
+  }
+});
+
+
+
+
+
+
+
 
