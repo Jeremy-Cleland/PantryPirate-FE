@@ -12,7 +12,7 @@ const getUserLists = async () => {
     const username = 'testUser'
     const userListFromDB = await axios.get(`https://pantrypirate.onrender.com/list/${username}`);
     setUserList(userListFromDB.data);
-    console.log('userList ------->>', userListFromDB);
+    // console.log('userList ------->>', userListFromDB);
 } catch (error) {
   console.log('List Screen error----->>>', error);
 }
@@ -21,6 +21,20 @@ useEffect(() => {
   getUserLists();
 }, []);
 
+const handleSelectList = async (list, item) => {
+  try {
+    const url = `https://pantrypirate.onrender.com/list/${list._id}`;
+    // console.log('url ------->>', url);
+    const itemToUpdate = {items: [...list.items, item]}
+    // console.log('itemToUpdate ------->>', itemToUpdate);
+    
+    await axios.put(url, itemToUpdate);
+  } catch (error) {
+    console.log('handleSelectList error----->>>', error);
+  }
+
+}
+
 
 if (route.params) {
   const { response } = route.params;
@@ -28,7 +42,7 @@ if (route.params) {
   return (
     <View>
     {userList && userList.map((list, idx) => {
-      return <Button key={`list-${idx}`} title={`${list._id}`}/>
+      return <Button key={`list-${idx}`} title={`${list.name}`} onPress={() => handleSelectList(list, item)}/>
     })}
     <Text>{item}</Text>
   </View>
@@ -39,7 +53,7 @@ if (!route.params) {
   return (
 <View>
   {userList && userList.map((list, idx) => {
-    return <Button key={`list-${idx}`} title={`${list._id}`}/>
+    return <Button key={`list-${idx}`} title={`${list.name}`} onPress={handleViewList}/>
   })}
 </View>
   )
