@@ -30,16 +30,32 @@ export default function HomeScreen({ navigation }) {
   const screenHeight = Dimensions.get('window').height;
   const imageHeight = screenHeight * 0.3;
 
-  
+
   if (!isLoggedIn) {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#EFEFE7' }}>
-        <Pressable style={styles.login} title="Login" onPress={handleLoginButton}>
-          <Text style={{color: 'white'}}>Login</Text>
+        <Pressable
+          style={({ pressed }) => [
+            styles.login,
+            {
+              backgroundColor: pressed ? 'gray' : 'black',
+            },
+          ]}
+          title="Login"
+          onPress={handleLoginButton}>
+          <Text style={{ color: 'white' }}>Login</Text>
         </Pressable>
-        <Image source={image} style={{width: imageWidth , height: imageHeight, position: 'absolute', top: 70}} />
-        <Pressable style={styles.button} title="Scan" onPress={handleScanButton} >
-          <Text style={{color: 'white'}}>Scan</Text>
+        <Image source={image} style={{ width: imageWidth, height: imageHeight, position: 'absolute', top: 70 }} />
+        <Pressable
+          style={({ pressed }) => [
+            styles.button,
+            {
+              backgroundColor: pressed ? 'gray' : 'black',
+            },
+          ]}
+          title="Scan"
+          onPress={handleScanButton} >
+          <Text style={{ color: 'white' }}>Scan</Text>
         </Pressable>
       </View>
     );
@@ -47,20 +63,55 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Pressable style={styles.login} title="Logout" onPress={handleLogoutButton}>
+      <Pressable
+        style={({ pressed }) => [
+          styles.login,
+          {
+            backgroundColor: pressed ? 'gray' : 'black',
+          },
+        ]}
+        title="Logout"
+        onPress={handleLogoutButton}
+      >
         <Text style={styles.loginText}>Logout</Text>
       </Pressable>
-      <Image source={image} style={{width: imageWidth , height: imageHeight, position: 'absolute', top: 70}} />
+      <Image source={image} style={{ width: imageWidth, height: imageHeight, position: 'absolute', top: 70 }} />
       <View style={styles.buttonRow}>
-        <Pressable style={styles.button} title="My Lists" onPress={handleMyListsButton} >
+        <Pressable
+          style={({ pressed }) => [
+            styles.button,
+            {
+              backgroundColor: pressed ? 'gray' : 'black',
+            },
+          ]}
+          title="My Lists"
+          onPress={handleMyListsButton}
+        >
           <Text style={styles.buttonText}>My Lists</Text>
         </Pressable>
-        <Pressable style={styles.button} title="My Pantry" onPress={handleMyPantryButton} >
+        <Pressable
+          style={({ pressed }) => [
+            styles.button,
+            {
+              backgroundColor: pressed ? 'gray' : 'black',
+            },
+          ]}
+          title="My Pantry"
+          onPress={handleMyPantryButton}
+        >
           <Text style={styles.buttonText}>My Pantry</Text>
         </Pressable>
       </View>
       <View style={styles.buttonContainer}>
-        <Pressable style={styles.button} title="Scan" onPress={handleScanButton} >
+        <Pressable style={({ pressed }) => [
+          styles.button,
+          {
+            backgroundColor: pressed ? 'gray' : 'black',
+          },
+        ]}
+          title="Scan"
+          onPress={handleScanButton}
+        >
           <Text style={styles.buttonText}>Scan</Text>
         </Pressable>
       </View>

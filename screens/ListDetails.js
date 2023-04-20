@@ -1,10 +1,11 @@
-import { View, Text, Pressable } from 'react-native'
+import { View, Text, Pressable, StyleSheet } from 'react-native'
 import axios from 'axios';
 import { useState } from 'react';
 
 
 export default function ({ navigation, route }) {
   const [list, SetList] = useState(route.params.list);
+  const [clickedItems, setClickedItems] = useState([]);
 
   const handleDeleteItem = (item) => {
     const index = list.items.indexOf(item);
@@ -19,26 +20,69 @@ export default function ({ navigation, route }) {
         .catch((err) => console.log(err))
     }
   }
-  
+
+  const handleItemClick = (item) => {
+    if (clickedItems.includes(item)) {
+      setClickedItems(clickedItems.filter(clickedItem => clickedItem !== item));
+    } else {
+      setClickedItems([...clickedItems, item]);
+    }
+  }
+
   return (
-    <View style={{backgroundColor: '#EFEFE7', flex: 1}}>
+    <View style={styles.container}>
       {list.items.map((item, idx) => {
+        const isClicked = clickedItems.includes(item);
         return (
-          <View key={`item-${idx}`} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', margin: 5}}>
-            <Text style={{width: '60%'}}>{item}</Text>
+          <View key={`item-${idx}`} style={styles.itemContainer}>
+            <Text
+              style={[styles.itemText, isClicked && styles.clickedText]}
+              onPress={() => handleItemClick(item)}
+            >
+              {item}
+            </Text>
             <Pressable
-              style={{
-                backgroundColor: 'black',
-                padding: 10,
-                borderRadius: 5,
-              }}
+              style={({ pressed }) => [
+                styles.deleteButton,
+                {
+                  backgroundColor: pressed ? 'gray' : 'black',
+                },
+              ]}
               onPress={() => handleDeleteItem(item)}
             >
-              <Text style={{color: 'white'}}>Delete</Text>
+              <Text style={styles.deleteButtonText}>Delete</Text>
             </Pressable>
           </View>
-        )
+        );
       })}
     </View>
-  )
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#EFEFE7',
+    flex: 1,
+  },
+  itemContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: 5,
+  },
+  itemText: {
+    width: '60%',
+  },
+  clickedText: {
+    textDecorationLine: 'line-through',
+    opacity: 0.5,
+  },
+  deleteButton: {
+    backgroundColor: 'black',
+    padding: 10,
+    borderRadius: 5,
+  },
+  deleteButtonText: {
+    color: 'white',
+  },
+});

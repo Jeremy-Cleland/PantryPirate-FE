@@ -1,4 +1,4 @@
-import { Text, View, Pressable, StyleSheet } from 'react-native';
+import { Text, View, Pressable, StyleSheet, ScrollView } from 'react-native';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
@@ -40,7 +40,7 @@ export default function MyLists({ navigation, route }) {
         setShowLists(true);
         navigation.reset({
           index: 0,
-          routes: [{name: 'Home'}, { name: 'Scan' }],
+          routes: [{ name: 'Home' }, { name: 'Scan' }],
         });
       }, 3000);
 
@@ -69,18 +69,25 @@ export default function MyLists({ navigation, route }) {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Select List</Text>
-        {message && <Text>{message}</Text>}
-        {showLists && userList && userList.map((list, idx) => {
-          return (
-            <Pressable
-              key={`list-${idx}`}
-              style={styles.button}
-              onPress={() => handleSelectList(list, item)}
-            >
-              <Text style={styles.text}>{list.name}</Text>
-            </Pressable>
-          );
-        })}
+        {message && <Text style={styles.message}>{message}</Text>}
+        <ScrollView>
+          {showLists && userList && userList.map((list, idx) => {
+            return (
+              <Pressable
+                key={`list-${idx}`}
+                style={({ pressed }) => [
+                  styles.button,
+                  {
+                    backgroundColor: pressed ? 'gray' : 'black',
+                  },
+                ]}
+                onPress={() => handleSelectList(list, item)}
+              >
+                <Text style={styles.text}>{list.name}</Text>
+              </Pressable>
+            );
+          })}
+        </ScrollView>
       </View>
     )
   }
@@ -88,41 +95,81 @@ export default function MyLists({ navigation, route }) {
 
     return (
       <View style={styles.container}>
-        <View style={styles.buttonContainer}>
-          <Pressable style={styles.button} onPress={handleAddList}>
-            <Text style={styles.text}>Create New List</Text>
-          </Pressable>
-        </View>
-        {userList && userList.map((list, idx) => {
-          return (
-            <View key={`edit-${idx}`} style={styles.listContainer}>
-              <Pressable style={styles.button} onPress={() => handleViewList(list)}>
-                <Text style={styles.text}>{list.name} - View Items</Text>
-              </Pressable>
-              <Pressable style={styles.button} onPress={() => handleEdit(list)}>
-                <Text style={styles.text}>Edit Members</Text>
-              </Pressable>
-            </View>
-          );
-        })}
+        <ScrollView>
+          <View style={styles.buttonContainer}>
+            <Pressable
+              style={({ pressed }) => [
+                styles.boxButton,
+                {
+                  backgroundColor: pressed ? 'gray' : 'black',
+                },
+              ]}
+              onPress={handleAddList}
+            >
+              <Text style={styles.text}>Create New List</Text>
+            </Pressable>
+          </View>
+          {userList && userList.map((list, idx) => {
+            return (
+              <View key={`edit-${idx}`} style={styles.listContainer}>
+                <Text style={styles.listTitle}>{list.name}</Text>
+                <View style={styles.buttonContainer}>
+                  <Pressable
+                    style={({ pressed }) => [
+                      styles.boxButton,
+                      {
+                        backgroundColor: pressed ? 'gray' : 'black',
+                      },
+                    ]}
+                    onPress={() => handleViewList(list)}
+                  >
+                    <Text style={styles.text}>View Items</Text>
+                  </Pressable>
+                  <Pressable
+                    style={({ pressed }) => [
+                      styles.boxButton,
+                      {
+                        backgroundColor: pressed ? 'gray' : 'black',
+                      },
+                    ]}
+                    onPress={() => handleEdit(list)}
+                  >
+                    <Text style={styles.text}>Edit Members</Text>
+                  </Pressable>
+                </View>
+              </View>
+            );
+          })}
+        </ScrollView>
       </View>
-    )
+    );
   }
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#EFEFE7', 
-    flex: 1
+    backgroundColor: '#EFEFE7',
+    flex: 1,
+  },
+  listContainer: {
+    backgroundColor: 'white',
+    borderWidth: 4,
+    borderColor: 'black',
+    borderRadius: 10,
+    padding: 10,
+    marginVertical: 10,
+    marginHorizontal: 50,
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
+    marginBottom: 10,
+    marginTop: 10
   },
-  listContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    margin: 5,
+  listTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center'
   },
   button: {
     backgroundColor: 'black',
@@ -141,5 +188,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     margin: 20,
   },
-
+  message: {
+    fontSize: 28,
+    textAlign: 'center',
+  },
+  boxButton: {
+    backgroundColor: 'black',
+    padding: 10,
+    marginHorizontal: 20,
+    borderRadius: 5
+  },
 });
