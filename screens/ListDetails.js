@@ -45,7 +45,7 @@ export default function ({ navigation, route }) {
               style={({ pressed }) => [
                 styles.deleteButton,
                 {
-                  backgroundColor: pressed ? 'gray' : 'black',
+                  backgroundColor: pressed ? 'gray' : '#bb0a1e',
                 },
               ]}
               onPress={() => handleDeleteItem(item)}
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   deleteButton: {
-    backgroundColor: 'black',
+    backgroundColor: '#bb0a1e',
     padding: 10,
     borderRadius: 5,
   },
