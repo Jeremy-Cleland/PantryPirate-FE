@@ -33,7 +33,7 @@ export default function MyLists({ navigation, route }) {
 
       await axios.put(url, itemToUpdate);
 
-      setMessage(`Added ${item} to ${list.name}`);
+      setMessage(`Added \n\n${item} \n\nto ${list.name}`);
       setShowLists(false);
       setTimeout(() => {
         setMessage(null);
@@ -69,7 +69,16 @@ export default function MyLists({ navigation, route }) {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Select List</Text>
-        {message && <Text style={styles.message}>{message}</Text>}
+
+
+        {message && 
+        <View style={styles.listContainer}>
+          <Text style={styles.message}>{message}</Text>
+        </View>
+        }
+
+
+
         <ScrollView>
           {showLists && userList && userList.map((list, idx) => {
             return (
