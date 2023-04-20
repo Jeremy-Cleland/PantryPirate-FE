@@ -41,7 +41,7 @@ export default function HomeScreen({ navigation }) {
         <Pressable style={styles.login} title="Login" onPress={handleLoginButton}>
           <Text style={{color: 'white'}}>Login</Text>
         </Pressable>
-        <Image source={image} style={{width: imageWidth , height: imageHeight, position: 'absolute', top: 70}} />
+        <Image source={image} style={{width: imageWidth , height: imageHeight, position: 'absolute', top: 150}} />
         <Pressable style={styles.button} title="Scan" onPress={handleScanButton} >
           <Text style={{color: 'white'}}>Scan</Text>
         </Pressable>
@@ -57,7 +57,7 @@ export default function HomeScreen({ navigation }) {
       <Pressable style={styles.login} title="Logout" onPress={handleLogoutButton}>
         <Text style={styles.loginText}>Logout</Text>
       </Pressable>
-      <Image source={image} style={{width: imageWidth , height: imageHeight, position: 'absolute', top: 70}} />
+      <Image source={image} style={{width: imageWidth , height: imageHeight, position: 'absolute', top: 150}} />
       <View style={styles.buttonRow}>
         <Pressable style={styles.button} title="My Lists" onPress={handleMyListsButton} >
           <Text style={styles.buttonText}>My Lists</Text>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   buttonContainer: {
-    marginTop: 30,
+    marginTop: 20,
     alignItems: 'center',
   },
   button: {
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 12,
     paddingHorizontal: 32,
+    
     margin: 10,
     borderRadius: 4,
     elevation: 3,

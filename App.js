@@ -6,7 +6,7 @@ import Item from './screens/Item';
 import MyLists from './screens/MyLists';
 import ListDetails from './screens/ListDetails';
 // import MyPantry from './screens/MyPantry';
-import { Text, View, Button, StyleSheet } from 'react-native';
+import { Text, View, Button, Pressable } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
 import { useState, useEffect } from 'react';
@@ -58,15 +58,28 @@ export default function App() {
           component={HomeScreen}
           options={({ navigation }) => ({
             headerRight: () => (
-              <View style={styles.container}>
+              <View>
                 {userInfo === null ? (
-                  <Button
-                    title="Sign in with Google"
+                  <Pressable
+
+                    title="Login"
                     disabled={!request}
+                    style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      paddingVertical: 12,
+                      paddingHorizontal: 32,
+                      margin: 10,
+                      borderRadius: 4,
+                      elevation: 3,
+                      backgroundColor: 'black',
+                    }}
                     onPress={() => {
                       promptAsync();
                     }}
+
                   />
+
                 ) : (
                   <Text style={styles.text}>{userInfo.name}</Text>
                 )}
@@ -97,17 +110,9 @@ export default function App() {
         {/* <Stack.Screen name="MyPantry" component={MyPantry} /> */}
       </Stack.Navigator>
     </NavigationContainer>
-
-
-
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
 
-  }
-});
 
 
 
