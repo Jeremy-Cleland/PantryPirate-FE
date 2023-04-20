@@ -26,6 +26,7 @@ export default function HomeScreen({ navigation, route }) {
   }
   const handleLogoutButton = () => {
     setIsLoggedIn(false);
+    setValidUser('');
   }
 
   const handleMyListsButton = () => {
