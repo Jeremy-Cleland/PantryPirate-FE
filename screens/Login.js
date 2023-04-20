@@ -1,4 +1,4 @@
-import { TextInput, View, Pressable, StyleSheet, Text, Alert } from 'react-native';
+import { TextInput, View, Pressable, StyleSheet, Text, Alert, ScrollView } from 'react-native';
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -63,86 +63,88 @@ export default function Login({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <Text style={styles.inputHeader}>Username</Text>
-        <View style={styles.textInputContainer}>
-          <TextInput
-            placeholder="Username"
-            value={username}
-            onChangeText={setUsername}
-            style={styles.input}
-          />
-        </View>
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.inputHeader}>Password</Text>
-        <View style={styles.textInputContainer}>
-          <TextInput
-            placeholder="Password"
-            value={password}
-            onChangeText={setPassword}
-            style={styles.input}
-            secureTextEntry={true}
-          />
-        </View>
-      </View>
-      {isSignUp &&
+      <ScrollView>
         <View style={styles.inputContainer}>
-          <Text style={styles.inputHeader}>Confirm Password</Text>
+          <Text style={styles.inputHeader}>Username</Text>
           <View style={styles.textInputContainer}>
             <TextInput
-              placeholder="Verify Password"
-              value={verifyPassword}
-              onChangeText={setVerifyPassword}
+              placeholder="Username"
+              value={username}
+              onChangeText={setUsername}
+              style={styles.input}
+            />
+          </View>
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputHeader}>Password</Text>
+          <View style={styles.textInputContainer}>
+            <TextInput
+              placeholder="Password"
+              value={password}
+              onChangeText={setPassword}
               style={styles.input}
               secureTextEntry={true}
             />
           </View>
         </View>
-      }
-      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-        {
-          !isSignUp ?
-            <View>
-              <Pressable
-                onPress={handleUserSubmit}
-                style={({ pressed }) => [
-                  styles.button,
-                  {
-                    backgroundColor: pressed ? 'gray' : 'black',
-                  },
-                ]}
-              >
-                <Text style={styles.buttonText}>Login</Text>
-              </Pressable>
-              <Pressable
-                onPress={() => setIsSignUp(true)}
-                style={({ pressed }) => [
-                  styles.button,
-                  {
-                    backgroundColor: pressed ? 'gray' : 'black',
-                  },
-                ]}
-              >
-                <Text style={styles.buttonText}>Create Account</Text>
-              </Pressable>
+        {isSignUp &&
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputHeader}>Confirm Password</Text>
+            <View style={styles.textInputContainer}>
+              <TextInput
+                placeholder="Verify Password"
+                value={verifyPassword}
+                onChangeText={setVerifyPassword}
+                style={styles.input}
+                secureTextEntry={true}
+              />
             </View>
-            :
-            <Pressable
-              onPress={handleUserSignUp}
-              style={({ pressed }) => [
-                styles.button,
-                {
-                  backgroundColor: pressed ? 'gray' : 'black',
-                },
-              ]}
-            >
-              <Text style={styles.buttonText}>Signup</Text>
-            </Pressable>
-
+          </View>
         }
+        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+          {
+            !isSignUp ?
+              <View>
+                <Pressable
+                  onPress={handleUserSubmit}
+                  style={({ pressed }) => [
+                    styles.button,
+                    {
+                      backgroundColor: pressed ? 'gray' : 'black',
+                    },
+                  ]}
+                >
+                  <Text style={styles.buttonText}>Login</Text>
+                </Pressable>
+                <Pressable
+                  onPress={() => setIsSignUp(true)}
+                  style={({ pressed }) => [
+                    styles.button,
+                    {
+                      backgroundColor: pressed ? 'gray' : 'black',
+                    },
+                  ]}
+                >
+                  <Text style={styles.buttonText}>Create Account</Text>
+                </Pressable>
+              </View>
+              :
+              <Pressable
+                onPress={handleUserSignUp}
+                style={({ pressed }) => [
+                  styles.button,
+                  {
+                    backgroundColor: pressed ? 'gray' : 'black',
+                  },
+                ]}
+              >
+                <Text style={styles.buttonText}>Signup</Text>
+              </Pressable>
 
-      </View>
+          }
+
+        </View>
+      </ScrollView>
     </View>
   )
 }
