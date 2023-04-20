@@ -2,37 +2,34 @@ import { TextInput, View, Pressable, StyleSheet, Text } from 'react-native';
 import { useState } from 'react';
 import axios from 'axios';
 
-export default function AddList({ navigation, route }) {
+export default function AddPantry({ navigation, route }) {
 
-  const [listName, setListName] = useState('');
+  const [pantryName, setPantryName] = useState('');
   const [members, setMembers] = useState('');
-
   const { validUser } = route.params;
 
-  const handleListSubmit = () => {
+  const handlePantrySubmit = () => {
 
     let membersArr = members.split(' ')
-    const list = { creator: validUser, name: listName, members: [...membersArr, validUser] }
-    console.log('list ------->>', list);
-    axios.post('https://pantrypirate.onrender.com/list', list)
+    const pantry = { creator: validUser, name: pantryName, members: [...membersArr, validUser] }
+    console.log('pantry ------->>', pantry);
+    axios.post('https://pantrypirate.onrender.com/pantry', pantry)
 
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Home', params: { validUser } }, { name: 'MyLists', params: { validUser } }],
+      routes: [{ name: 'Home', params: { validUser } }, { name: 'MyPantry', params: { validUser } }],
     });
-
-
   }
 
   return (
     <View style={styles.container}>
        <View style={styles.inputContainer}>
-          <Text style={styles.inputHeader}>List Name</Text>
+          <Text style={styles.inputHeader}>Pantry Name</Text>
           <View style={styles.textInputContainer}>
             <TextInput
-              placeholder="List Name"
-              value={listName}
-              onChangeText={setListName}
+              placeholder="Pantry Name"
+              value={pantryName}
+              onChangeText={setPantryName}
               style={styles.input}
             />
           </View>
@@ -50,7 +47,7 @@ export default function AddList({ navigation, route }) {
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
         <Pressable
-          onPress={handleListSubmit}
+          onPress={handlePantrySubmit}
           style={({ pressed }) => [
             styles.button,
             {
@@ -58,7 +55,7 @@ export default function AddList({ navigation, route }) {
             },
           ]}
         >
-          <Text style={styles.buttonText}>Create List</Text>
+          <Text style={styles.buttonText}>Create Pantry</Text>
         </Pressable>
       </View>
     </View>

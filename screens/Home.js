@@ -9,15 +9,15 @@ export default function HomeScreen({ navigation, route }) {
 
   useEffect(() => {
     if (route.params) {
-      console.log('HELLO FROM ROUTE PARAMSSSS');
       const { username } = route.params;
+      console.log('username coming into home screen ------->>', username);
       setValidUser(username);
       setIsLoggedIn(true);
     }
   }, [route.params]);
 
 
-  console.log('validUser ------->>', validUser);
+  // console.log('validUser ------->>', validUser);
 
 
   const handleLoginButton = () => {
@@ -34,7 +34,7 @@ export default function HomeScreen({ navigation, route }) {
   }
 
   const handleMyPantryButton = () => {
-    navigation.navigate('MyPantry');
+    navigation.navigate('MyPantry', { validUser });
   }
 
   const handleScanButton = () => {

@@ -2,44 +2,38 @@ import { Text, View, Pressable, StyleSheet, ScrollView } from 'react-native';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-
-export default function MyLists({ navigation, route }) {
-  const [userList, setUserList] = useState(null);
+export default function MyPantry({ navigation, route }) {
   const [message, setMessage] = useState(null);
-  const [showLists, setShowLists] = useState(true);
-
+  const [showPantries, setShowPantries] = useState(true);
+  const [userPantry, setUserPantry] = useState(null);
   const { validUser } = route.params;
-  console.log('validUser coming into my list ------->>', validUser)
 
-
-  const getUserLists = async () => {
+  const getUserPantries = async () => {
     try {
-      const userListFromDB = await axios.get(`https://pantrypirate.onrender.com/list/${validUser}`);
-      setUserList(userListFromDB.data);
-      // console.log('userList ------->>', userListFromDB);
+      const userPantryFromDB = await axios.get(`https://pantrypirate.onrender.com/pantry/${validUser}`);
+      setUserPantry(userPantryFromDB.data);
     } catch (error) {
-      console.log('List Screen error----->>>', error);
+      console.log('Pantry Screen error----->>>', error);
     }
   }
   useEffect(() => {
-    getUserLists();
+    getUserPantries();
   }, []);
 
-  const handleSelectList = async (list, item) => {
+  const handleSelectPantry = async (pantry, item) => {
     try {
-      const url = `https://pantrypirate.onrender.com/list/${list._id}`;
+      const url = `https://pantrypirate.onrender.com/pantry/${pantry._id}`;
       // console.log('url ------->>', url);
-      const itemToUpdate = { items: [...list.items, item] }
+      const itemToUpdate = { items: [...pantry.items, item] }
       // console.log('itemToUpdate ------->>', itemToUpdate);
 
       await axios.put(url, itemToUpdate);
 
-      setMessage(`Added \n\n${item} \n\nto ${list.name}`);
-      setShowLists(false);
+      setMessage(`Added \n\n${item} \n\nto ${pantry.name}`);
+      setShowPantries(false);
       setTimeout(() => {
         setMessage(null);
-        setShowLists(true);
-        console.log('validUser ------->>', validUser)
+        setShowPantries(true);
         navigation.reset({
           index: 0,
           routes: [{ name: 'Scan', params: { validUser } }],
@@ -47,54 +41,51 @@ export default function MyLists({ navigation, route }) {
       }, 3000);
 
     } catch (error) {
-      console.log('handleSelectList error----->>>', error);
+      console.log('handleSelectPantry error----->>>', error);
     }
 
   }
 
-  const handleEdit = (list) => {
-    navigation.navigate('EditList', { list, validUser });
+  const handleEdit = (pantry) => {
+    navigation.navigate('EditPantry', { pantry, validUser });
   }
 
-  const handleViewList = async (list) => {
-    navigation.navigate('ListDetails', { list, validUser });
+  const handleViewPantry = async (pantry) => {
+    navigation.navigate('PantryDetails', { pantry, validUser });
   }
 
-  const handleAddList = () => {
-    navigation.navigate('AddList', { validUser });
+  const handleAddPantry = () => {
+    navigation.navigate('AddPantry', { validUser });
   }
-
 
   if (route.params.response) {
     const { response } = route.params;
     const item = response.SearchResult.Items[0].ItemInfo.Title.DisplayValue;
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Select List</Text>
+        <Text style={styles.title}>Select Pantry</Text>
 
 
         {message &&
-          <View style={styles.listContainer}>
+          <View style={styles.pantryContainer}>
             <Text style={styles.message}>{message}</Text>
           </View>
         }
 
-
-
         <ScrollView>
-          {showLists && userList && userList.map((list, idx) => {
+          {showPantries && userPantry && userPantry.map((pantry, idx) => {
             return (
               <Pressable
-                key={`list-${idx}`}
+                key={`pantry-${idx}`}
                 style={({ pressed }) => [
                   styles.button,
                   {
                     backgroundColor: pressed ? 'gray' : 'black',
                   },
                 ]}
-                onPress={() => handleSelectList(list, item)}
+                onPress={() => handleSelectPantry(pantry, item)}
               >
-                <Text style={styles.text}>{list.name}</Text>
+                <Text style={styles.text}>{pantry.name}</Text>
               </Pressable>
             );
           })}
@@ -103,7 +94,6 @@ export default function MyLists({ navigation, route }) {
     )
   }
   if (!route.params.response) {
-
     return (
       <View style={styles.container}>
         <ScrollView>
@@ -115,15 +105,15 @@ export default function MyLists({ navigation, route }) {
                   backgroundColor: pressed ? 'gray' : 'black',
                 },
               ]}
-              onPress={handleAddList}
+              onPress={handleAddPantry}
             >
-              <Text style={styles.text}>Create New List</Text>
+              <Text style={styles.text}>Create New Pantry</Text>
             </Pressable>
           </View>
-          {userList && userList.map((list, idx) => {
+          {userPantry && userPantry.map((pantry, idx) => {
             return (
-              <View key={`edit-${idx}`} style={styles.listContainer}>
-                <Text style={styles.listTitle}>{list.name}</Text>
+              <View key={`edit-${idx}`} style={styles.pantryContainer}>
+                <Text style={styles.pantryTitle}>{pantry.name}</Text>
                 <View style={styles.buttonContainer}>
                   <Pressable
                     style={({ pressed }) => [
@@ -132,12 +122,12 @@ export default function MyLists({ navigation, route }) {
                         backgroundColor: pressed ? 'gray' : 'black',
                       },
                     ]}
-                    onPress={() => handleViewList(list)}
+                    onPress={() => handleViewPantry(pantry)}
                   >
                     <Text style={styles.text}>View Items</Text>
                   </Pressable>
                   {
-                    list.creator === validUser &&
+                    pantry.creator === validUser &&
 
                     <Pressable
                       style={({ pressed }) => [
@@ -146,7 +136,7 @@ export default function MyLists({ navigation, route }) {
                           backgroundColor: pressed ? 'gray' : 'black',
                         },
                       ]}
-                      onPress={() => handleEdit(list)}
+                      onPress={() => handleEdit(pantry)}
                     >
                       <Text style={styles.text}>Edit Members</Text>
                     </Pressable>
@@ -165,7 +155,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#EFEFE7',
     flex: 1,
   },
-  listContainer: {
+  pantryContainer: {
     backgroundColor: 'white',
     borderWidth: 4,
     borderColor: 'black',
@@ -180,7 +170,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 10
   },
-  listTitle: {
+  pantryTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,

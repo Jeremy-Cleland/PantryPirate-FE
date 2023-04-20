@@ -8,9 +8,10 @@ import ListDetails from './screens/ListDetails';
 import AddList from './screens/AddList';
 import EditList from './screens/EditList';
 import Login from './screens/Login';
-// import MyPantry from './screens/MyPantry';
-import { Pressable } from 'react-native';
-import { useState } from 'react';
+import EditPantry from './screens/EditPantry';
+import AddPantry from './screens/AddPantry';
+import PantryDetails from './screens/PantryDetails';
+import MyPantry from './screens/MyPantry';
 
 
 
@@ -29,25 +30,7 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          // options={({ navigation }) => ({
-          //   headerRight: () => (
-          //     <Pressable
-          //       title="Login"
-          //       style={{
-          //         alignItems: 'center',
-          //         justifyContent: 'center',
-          //         paddingVertical: 12,
-          //         paddingHorizontal: 32,
-          //         margin: 10,
-          //         borderRadius: 4,
-          //         elevation: 3,
-          //         backgroundColor: 'black',
-          //       }}
 
-          //     />
-          //   ),
-          // })
-          // }
         />
         <Stack.Screen name="Scan" component={Scan} />
         <Stack.Screen name="Item" component={Item} />
@@ -56,7 +39,11 @@ export default function App() {
         <Stack.Screen name="AddList" component={AddList} />
         <Stack.Screen name='EditList' component={EditList} />
         <Stack.Screen name='Login' component={Login} />
-        {/* <Stack.Screen name="MyPantry" component={MyPantry} /> */}
+        <Stack.Screen name='MyPantry' component={MyPantry} />
+        <Stack.Screen name='EditPantry' component={EditPantry} />
+        <Stack.Screen name='AddPantry' component={AddPantry} />
+        <Stack.Screen name='PantryDetails' component={PantryDetails} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

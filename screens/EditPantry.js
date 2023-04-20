@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import { View, Pressable, TextInput, StyleSheet, Text } from 'react-native';
 import axios from 'axios';
 
-export default function EditList({ navigation, route }) {
+export default function EditPantry({ navigation, route }) {
 
-  const [listName, setListName] = useState(route.params.list.name);
-  const [members, setMembers] = useState(route.params.list.members.join(' ').replace(route.params.validUser, ''));
+  const [pantryName, setPantryName] = useState(route.params.pantry.name);
+  const [members, setMembers] = useState(route.params.pantry.members.join(' ').replace(route.params.validUser, ''));
 
   const handleUpdateSubmit = async () => {
     try {
       let membersArr = members.split(' ').filter((member) => member !== '');
-      const updatedList = { ...route.params.list, name: listName, members: [...membersArr, route.params.validUser] };
-      await axios.put(`https://pantrypirate.onrender.com/list/${updatedList._id}`, updatedList);
+      const updatedPantry = { ...route.params.pantry, name: pantryName, members: [...membersArr, route.params.validUser] };
+      await axios.put(`https://pantrypirate.onrender.com/pantry/${updatedPantry._id}`, updatedPantry);
       navigation.reset({
         index: 0,
-        routes: [{ name: 'Home', params: { validUser: route.params.validUser } }, { name: 'MyLists', params: { validUser: route.params.validUser } }],
+        routes: [{ name: 'Home', params: { validUser: route.params.validUser } }, { name: 'MyPantry', params: { validUser: route.params.validUser } }],
       });
     } catch (error) {
       console.log('handleUpdateSubmit error----->>>', error)
@@ -23,18 +23,18 @@ export default function EditList({ navigation, route }) {
   }
 
   const handleDeleteSubmit = async () => {
-    await axios.delete(`https://pantrypirate.onrender.com/list/${route.params.list._id}`)
+    await axios.delete(`https://pantrypirate.onrender.com/pantry/${route.params.pantry._id}`)
 
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Home', params: { validUser: route.params.validUser } }, { name: 'MyLists', params: { validUser: route.params.validUser } }],
+      routes: [{ name: 'Home', params: { validUser: route.params.validUser } }, { name: 'MyPantry', params: { validUser: route.params.validUser } }],
     });
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.delete}>
-        {route.params.list.creator === route.params.validUser && (
+        {route.params.pantry.creator === route.params.validUser && (
           <Pressable
             onPress={handleDeleteSubmit}
             style={({ pressed }) => [
@@ -44,18 +44,18 @@ export default function EditList({ navigation, route }) {
               },
             ]}
           >
-            <Text style={styles.buttonText}>Delete List</Text>
+            <Text style={styles.buttonText}>Delete Pantry</Text>
           </Pressable>
         )}
       </View>
       <View style={{ marginTop: 50 }}>
         <View style={styles.inputContainer}>
-          <Text style={styles.inputHeader}>List Name</Text>
+          <Text style={styles.inputHeader}>Pantry Name</Text>
           <View style={styles.textInputContainer}>
             <TextInput
-              placeholder="List Name"
-              value={listName}
-              onChangeText={setListName}
+              placeholder="Pantry Name"
+              value={pantryName}
+              onChangeText={setPantryName}
               style={styles.input}
             />
           </View>
@@ -82,7 +82,7 @@ export default function EditList({ navigation, route }) {
             },
           ]}
         >
-          <Text style={styles.buttonText}>Update List</Text>
+          <Text style={styles.buttonText}>Update Pantry</Text>
         </Pressable>
       </View>
     </View>
