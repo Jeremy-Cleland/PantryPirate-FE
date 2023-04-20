@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import image from '../assets/PantryPirateLogo.png';
 
 export default function Item({ navigation, route }) {
-  const { data } = route.params;
+  const { data, validUser } = route.params;
   const [response, setResponse] = useState({});
 
   const handleScanButton = () => {
@@ -15,7 +15,7 @@ export default function Item({ navigation, route }) {
   }
 
   const handleListButton = () => {
-    navigation.navigate('MyLists', { response });
+    navigation.navigate('MyLists', { response, validUser });
   }
 
   useEffect(() => {
@@ -56,11 +56,13 @@ export default function Item({ navigation, route }) {
           <Text>Sorry, but this item was not found.</Text>
         )}
       </View>
+      {validUser !== '' && (
       <View style={styles.buttonContainer}>
         <Pressable style={styles.button} onPress={handleListButton}>
           <Text style={styles.buttonText}>Add to List</Text>
         </Pressable>
       </View>
+      )}
     </View>
   );
 }
