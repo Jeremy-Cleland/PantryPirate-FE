@@ -17,6 +17,9 @@ export default function Item({ navigation, route }) {
   const handleListButton = () => {
     navigation.navigate('MyLists', { response, validUser });
   }
+  const handlePantryButton = () => {
+    navigation.navigate('MyPantry', { response, validUser });
+  }
 
   useEffect(() => {
     const getData = async () => {
@@ -53,15 +56,22 @@ export default function Item({ navigation, route }) {
             <Text style={styles.text}>Item: {response.Errors === undefined ? response.SearchResult.Items[0].ItemInfo.Title.DisplayValue : 'Not Found'}</Text>
           </View>
         ) : (
-          <Text>Sorry, but this item was not found.</Text>
+          <Text>Loading...</Text>
         )}
       </View>
       {validUser !== '' && (
-      <View style={styles.buttonContainer}>
-        <Pressable style={styles.button} onPress={handleListButton}>
-          <Text style={styles.buttonText}>Add to List</Text>
-        </Pressable>
-      </View>
+        <View style={styles.container}>
+          <View style={styles.buttonContainer}>
+            <Pressable style={styles.button} onPress={handleListButton}>
+              <Text style={styles.buttonText}>Add to List</Text>
+            </Pressable>
+          </View>
+          <View style={styles.buttonContainer}>
+            <Pressable style={styles.button} onPress={handlePantryButton}>
+              <Text style={styles.buttonText}>Add to Pantry</Text>
+            </Pressable>
+          </View>
+        </View>
       )}
     </View>
   );
@@ -101,7 +111,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   imageContainer: {
-    justifyContent: 'center', 
+    justifyContent: 'center',
     alignItems: 'center'
   },
 });

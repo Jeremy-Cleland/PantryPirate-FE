@@ -4,41 +4,28 @@ import { useState } from 'react';
 
 
 export default function ({ route }) {
-  const [list, SetList] = useState(route.params.list);
-  const [clickedItems, setClickedItems] = useState([]);
+  const [pantry, SetPantry] = useState(route.params.pantry);
 
   const handleDeleteItem = (item) => {
-    const index = list.items.indexOf(item);
+    const index = pantry.items.indexOf(item);
     if (index !== -1) {
-      const newList = [...list.items];
-      newList.splice(index, 1);
-      const updatedList = { ...list, items: newList };
-      axios.put(`https://pantrypirate.onrender.com/list/${list._id}`, updatedList)
+      const newPantry = [...pantry.items];
+      newPantry.splice(index, 1);
+      const updatedPantry = { ...pantry, items: newPantry };
+      axios.put(`https://pantrypirate.onrender.com/pantry/${pantry._id}`, updatedPantry)
         .then(() =>{
-          SetList(updatedList);
+          SetPantry(updatedPantry);
         })
         .catch((err) => console.log(err))
     }
   }
 
-  const handleItemClick = (item) => {
-    if (clickedItems.includes(item)) {
-      setClickedItems(clickedItems.filter(clickedItem => clickedItem !== item));
-    } else {
-      setClickedItems([...clickedItems, item]);
-    }
-  }
-
   return (
     <View style={styles.container}>
-      {list.items.map((item, idx) => {
-        const isClicked = clickedItems.includes(item);
+      {pantry.items.map((item, idx) => {
         return (
           <View key={`item-${idx}`} style={styles.itemContainer}>
-            <Text
-              style={[styles.itemText, isClicked && styles.clickedText]}
-              onPress={() => handleItemClick(item)}
-            >
+            <Text style={styles.itemText}>
               {item}
             </Text>
             <Pressable
@@ -72,10 +59,6 @@ const styles = StyleSheet.create({
   },
   itemText: {
     width: '60%',
-  },
-  clickedText: {
-    textDecorationLine: 'line-through',
-    opacity: 0.5,
   },
   deleteButton: {
     backgroundColor: '#bb0a1e',

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Pressable } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
 export default function Scan({ navigation, route }) {
@@ -7,7 +7,7 @@ export default function Scan({ navigation, route }) {
   const [scanned, setScanned] = useState(false);
  
   const { validUser } = route.params;
-
+    console.log('validUser coming into scan ------->>', validUser)
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -22,6 +22,14 @@ export default function Scan({ navigation, route }) {
       navigation.navigate('Item', { data, validUser });
       
   };
+  const handleHome = () => {
+    console.log('validUser coming into handleHome ------->>', validUser)
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Home', params: { username: validUser } }],
+    });
+    
+};
 
 
   if (hasPermission === null) {
@@ -33,18 +41,58 @@ export default function Scan({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-      />
-      {/* {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />} */}
+      <View style={[styles.buttonContainer, styles.absolute]}>
+        <Pressable
+          style={({ pressed }) => [
+            styles.boxButton,
+            {
+              backgroundColor: pressed ? 'gray' : 'black',
+            },
+          ]}
+          onPress={handleHome}
+        >
+          <Text style={styles.text}>Back To Home</Text>
+        </Pressable>
+      </View>
+      <View style={[styles.container, styles.barcodeContainer]}>
+        <BarCodeScanner
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          style={StyleSheet.absoluteFillObject}
+        />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#EFEFE7',
     flex: 1,
-  }
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  text: {
+    color: 'white',
+  },
+  boxButton: {
+    backgroundColor: 'black',
+    padding: 10,
+    margin: 5,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#000',
+    color: 'black',
+  },
+  absolute: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+  },
+  barcodeContainer: {
+    marginTop: 50,
+  },
 });
