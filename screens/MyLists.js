@@ -29,6 +29,7 @@ export default function MyLists({ navigation, route }) {
       // console.log('itemToUpdate ------->>', itemToUpdate);
 
       await axios.put(url, itemToUpdate);
+
       navigation.reset({
         index: 0,
         routes: [{name: 'Home'}, { name: 'Scan' }],
@@ -70,20 +71,19 @@ export default function MyLists({ navigation, route }) {
 
     return (
       <View>
+        <View style={{flexDirection: 'row', justifyContent: 'center' }}>
+          <Button title="Create New List" onPress={handleAddList}  />
+        </View>
         {userList && userList.map((list, idx) => {
           return (
 
-            <View key={`edit-${idx}`}>
+            <View key={`edit-${idx}`} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', margin: 5}}>
               <Button title={`${list.name}  -  View Items`} onPress={() => handleViewList(list)} />
               <Button title="Edit Members" onPress={() => handleEdit(list)} />
             </View>
           )
         })}
-        <Button title="Create New List" onPress={handleAddList} />
       </View>
     )
   }
-
-
-
 }

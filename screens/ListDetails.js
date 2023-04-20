@@ -23,12 +23,12 @@ handleDeleteItem = (item) => {
     <View>
       {list.items.map((item, idx) => {
         return (
-          <View key={`item-${idx}`}>
-            <Text>{item}</Text>
+          <View key={`item-${idx}`} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', margin: 5}}>
+            <Text style={{width: '60%'}}>{item}</Text>
             <Button title="Delete" onPress={() => handleDeleteItem(item)} />
           </View>)
       })}
-      <Button title="Back to Home" onPress={() => navigation.navigate('Home')} />
+    
     </View>
   )
 }
