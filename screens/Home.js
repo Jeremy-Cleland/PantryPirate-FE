@@ -1,20 +1,35 @@
 import { View, Text, StyleSheet, Image, Pressable, Dimensions } from 'react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import image from '../assets/PantryPirateLogo.png';
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation, route }) {
 
+  const [validUser, setValidUser] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+    if (route.params) {
+      console.log('HELLO FROM ROUTE PARAMSSSS');
+      const { username } = route.params;
+      setValidUser(username);
+      setIsLoggedIn(true);
+    }
+  }, [route.params]);
+
+
+  console.log('validUser ------->>', validUser);
+
+
   const handleLoginButton = () => {
-    setIsLoggedIn(true);
+    // setIsLoggedIn(true);
+    navigation.navigate('Login');
   }
   const handleLogoutButton = () => {
     setIsLoggedIn(false);
   }
 
   const handleMyListsButton = () => {
-    navigation.navigate('MyLists');
+    navigation.navigate('MyLists', { validUser });
   }
 
   const handleMyPantryButton = () => {
@@ -22,7 +37,7 @@ export default function HomeScreen({ navigation }) {
   }
 
   const handleScanButton = () => {
-    navigation.navigate('Scan');
+    navigation.navigate('Scan', { validUser });
   }
 
   const screenWidth = Dimensions.get('window').width;

@@ -2,20 +2,23 @@ import { TextInput, View, Pressable, StyleSheet, Text } from 'react-native';
 import { useState } from 'react';
 import axios from 'axios';
 
-export default function AddList({ navigation }) {
+export default function AddList({ navigation, route }) {
 
   const [listName, setListName] = useState('');
   const [members, setMembers] = useState('');
 
+  const { validUser } = route.params;
+
   const handleListSubmit = () => {
 
     let membersArr = members.split(' ')
-    const list = { creator: 'testUser', name: listName, members: [...membersArr, 'testUser'] }
+    const list = { creator: validUser, name: listName, members: [...membersArr, validUser] }
+    console.log('list ------->>', list);
     axios.post('https://pantrypirate.onrender.com/list', list)
 
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Home' }, { name: 'MyLists' }],
+      routes: [{ name: 'Home' }, { name: 'MyLists', params: { validUser } }],
     });
 
 

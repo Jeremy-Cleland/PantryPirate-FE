@@ -6,16 +6,16 @@ import { styleProps } from 'react-native-web/dist/cjs/modules/forwardedProps';
 export default function EditList({ navigation, route }) {
 
   const [listName, setListName] = useState(route.params.list.name);
-  const [members, setMembers] = useState(route.params.list.members.join(' ').replace('testUser', ''));
+  const [members, setMembers] = useState(route.params.list.members.join(' ').replace(route.params.validUser, ''));
 
   const handleUpdateSubmit = async () => {
     try {
       let membersArr = members.split(' ').filter((member) => member !== '');
-      const updatedList = { ...route.params.list, name: listName, members: [...membersArr, 'testUser'] };
+      const updatedList = { ...route.params.list, name: listName, members: [...membersArr, route.params.validUser] };
       await axios.put(`https://pantrypirate.onrender.com/list/${updatedList._id}`, updatedList);
       navigation.reset({
         index: 0,
-        routes: [{ name: 'Home' }, { name: 'MyLists' }],
+        routes: [{ name: 'Home' }, { name: 'MyLists', params: { validUser: route.params.validUser } }],
       });
     } catch (error) {
       console.log('handleUpdateSubmit error----->>>', error)
@@ -28,14 +28,14 @@ export default function EditList({ navigation, route }) {
 
     navigation.reset({
       index: 0,
-      routes: [{ name: 'MyLists' }],
+      routes: [{ name: 'MyLists', params: { validUser: route.params.validUser } }],
     });
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.delete}>
-        {route.params.list.creator === 'testUser' && (
+        {route.params.list.creator === route.params.validUser && (
           <Pressable
             onPress={handleDeleteSubmit}
             style={({ pressed }) => [

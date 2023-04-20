@@ -8,12 +8,13 @@ export default function MyLists({ navigation, route }) {
   const [message, setMessage] = useState(null);
   const [showLists, setShowLists] = useState(true);
 
+  const { validUser } = route.params;
+
 
 
   const getUserLists = async () => {
     try {
-      const username = 'testUser'
-      const userListFromDB = await axios.get(`https://pantrypirate.onrender.com/list/${username}`);
+      const userListFromDB = await axios.get(`https://pantrypirate.onrender.com/list/${validUser}`);
       setUserList(userListFromDB.data);
       // console.log('userList ------->>', userListFromDB);
     } catch (error) {
@@ -40,7 +41,7 @@ export default function MyLists({ navigation, route }) {
         setShowLists(true);
         navigation.reset({
           index: 0,
-          routes: [{ name: 'Home' }, { name: 'Scan' }],
+          routes: [{ name: 'Home' }, { name: 'Scan', params: { validUser } }],
         });
       }, 3000);
 
@@ -51,7 +52,7 @@ export default function MyLists({ navigation, route }) {
   }
 
   const handleEdit = (list) => {
-    navigation.navigate('EditList', { list });
+    navigation.navigate('EditList', { list, validUser });
   }
 
   const handleViewList = async (list) => {
@@ -59,11 +60,11 @@ export default function MyLists({ navigation, route }) {
   }
 
   const handleAddList = () => {
-    navigation.navigate('AddList');
+    navigation.navigate('AddList', { validUser });
   }
 
 
-  if (route.params) {
+  if (route.params.response) {
     const { response } = route.params;
     const item = response.SearchResult.Items[0].ItemInfo.Title.DisplayValue;
     return (
@@ -100,7 +101,7 @@ export default function MyLists({ navigation, route }) {
       </View>
     )
   }
-  if (!route.params) {
+  if (!route.params.response) {
 
     return (
       <View style={styles.container}>
