@@ -39,9 +39,9 @@ export default function EditList({ navigation, route }) {
           <Pressable
             onPress={handleDeleteSubmit}
             style={({ pressed }) => [
-              styles.button,
+              styles.deleteButton,
               {
-                backgroundColor: pressed ? 'gray' : 'black',
+                backgroundColor: pressed ? 'gray' : '#bb0a1e',
               },
             ]}
           >
@@ -126,6 +126,12 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: 'black',
+    padding: 10,
+    margin: 10,
+    borderRadius: 5,
+  },
+  deleteButton: {
+    backgroundColor: '#bb0a1e',
     padding: 10,
     margin: 10,
     borderRadius: 5,
