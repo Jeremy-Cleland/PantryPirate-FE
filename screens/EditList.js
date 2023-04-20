@@ -41,22 +41,28 @@ export default function EditList({ navigation, route }) {
           <Button title="Delete List" onPress={handleDeleteSubmit} />
         }
       </View>
-      <View style={{marginTop: 50}}>
-        <Text style={{marginLeft: 30, marginTop: 30}}>List Name</Text>
-        <View style={styles.container}>
-          <TextInput
-            placeholder="List Name"
-            value={listName}
-            onChangeText={setListName}
-          />
+      <View style={{ marginTop: 50 }}>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputHeader}>List Name</Text>
+          <View style={styles.container}>
+            <TextInput
+              placeholder="List Name"
+              value={listName}
+              onChangeText={setListName}
+              style={{ backgroundColor: '#EFEFE7' }}
+            />
+          </View>
         </View>
-        <Text style={{marginLeft: 30, marginTop: 30}}>Members</Text>
-        <View style={styles.container}>
-          <TextInput
-            placeholder="Add Members"
-            value={members}
-            onChangeText={setMembers}
-          />
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputHeader}>Members</Text>
+          <View style={styles.container}>
+            <TextInput
+              placeholder="Add Members"
+              value={members}
+              onChangeText={setMembers}
+              style={{ backgroundColor: '#EFEFE7', padding: 10 }}
+            />
+          </View>
         </View>
       </View>
       <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
@@ -81,6 +87,18 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 0,
-  }
+  },
+  inputContainer: {
+    backgroundColor: 'black', 
+    margin: 15, 
+    borderRadius: 15, 
+    borderWidth: 1 
+
+  },
+  inputHeader: {
+    marginLeft: 30, 
+    marginTop: 30, 
+    color: 'white'
+  },
 
 });
