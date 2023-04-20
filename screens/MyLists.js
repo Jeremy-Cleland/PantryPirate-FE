@@ -1,10 +1,13 @@
-import { Text, View, Button } from 'react-native';
+import { Text, View, Pressable, StyleSheet, ScrollView } from 'react-native';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 
 export default function MyLists({ navigation, route }) {
   const [userList, setUserList] = useState(null);
+  const [message, setMessage] = useState(null);
+  const [showLists, setShowLists] = useState(true);
+
 
 
   const getUserLists = async () => {
@@ -30,11 +33,16 @@ export default function MyLists({ navigation, route }) {
 
       await axios.put(url, itemToUpdate);
 
-      navigation.reset({
-        index: 0,
-        routes: [{name: 'Home'}, { name: 'Scan' }],
-      });
-
+      setMessage(`Added ${item} to ${list.name}`);
+      setShowLists(false);
+      setTimeout(() => {
+        setMessage(null);
+        setShowLists(true);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Home' }, { name: 'Scan' }],
+        });
+      }, 3000);
 
     } catch (error) {
       console.log('handleSelectList error----->>>', error);
@@ -59,31 +67,135 @@ export default function MyLists({ navigation, route }) {
     const { response } = route.params;
     const item = response.SearchResult.Items[0].ItemInfo.Title.DisplayValue;
     return (
-      <View>
-        {userList && userList.map((list, idx) => {
-          return <Button key={`list-${idx}`} title={`${list.name}`} onPress={() => handleSelectList(list, item)} />
-        })}
-        <Text>{item}</Text>
+      <View style={styles.container}>
+        <Text style={styles.title}>Select List</Text>
+        {message && <Text style={styles.message}>{message}</Text>}
+        <ScrollView>
+          {showLists && userList && userList.map((list, idx) => {
+            return (
+              <Pressable
+                key={`list-${idx}`}
+                style={({ pressed }) => [
+                  styles.button,
+                  {
+                    backgroundColor: pressed ? 'gray' : 'black',
+                  },
+                ]}
+                onPress={() => handleSelectList(list, item)}
+              >
+                <Text style={styles.text}>{list.name}</Text>
+              </Pressable>
+            );
+          })}
+        </ScrollView>
       </View>
     )
   }
   if (!route.params) {
 
     return (
-      <View>
-        <View style={{flexDirection: 'row', justifyContent: 'center' }}>
-          <Button title="Create New List" onPress={handleAddList}  />
-        </View>
-        {userList && userList.map((list, idx) => {
-          return (
-
-            <View key={`edit-${idx}`} style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', margin: 5}}>
-              <Button title={`${list.name}  -  View Items`} onPress={() => handleViewList(list)} />
-              <Button title="Edit Members" onPress={() => handleEdit(list)} />
-            </View>
-          )
-        })}
+      <View style={styles.container}>
+        <ScrollView>
+          <View style={styles.buttonContainer}>
+            <Pressable
+              style={({ pressed }) => [
+                styles.boxButton,
+                {
+                  backgroundColor: pressed ? 'gray' : 'black',
+                },
+              ]}
+              onPress={handleAddList}
+            >
+              <Text style={styles.text}>Create New List</Text>
+            </Pressable>
+          </View>
+          {userList && userList.map((list, idx) => {
+            return (
+              <View key={`edit-${idx}`} style={styles.listContainer}>
+                <Text style={styles.listTitle}>{list.name}</Text>
+                <View style={styles.buttonContainer}>
+                  <Pressable
+                    style={({ pressed }) => [
+                      styles.boxButton,
+                      {
+                        backgroundColor: pressed ? 'gray' : 'black',
+                      },
+                    ]}
+                    onPress={() => handleViewList(list)}
+                  >
+                    <Text style={styles.text}>View Items</Text>
+                  </Pressable>
+                  <Pressable
+                    style={({ pressed }) => [
+                      styles.boxButton,
+                      {
+                        backgroundColor: pressed ? 'gray' : 'black',
+                      },
+                    ]}
+                    onPress={() => handleEdit(list)}
+                  >
+                    <Text style={styles.text}>Edit Members</Text>
+                  </Pressable>
+                </View>
+              </View>
+            );
+          })}
+        </ScrollView>
       </View>
-    )
+    );
   }
 }
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#EFEFE7',
+    flex: 1,
+  },
+  listContainer: {
+    backgroundColor: 'white',
+    borderWidth: 4,
+    borderColor: 'black',
+    borderRadius: 10,
+    padding: 10,
+    marginVertical: 10,
+    marginHorizontal: 50,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 10,
+    marginTop: 10
+  },
+  listTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center'
+  },
+  button: {
+    backgroundColor: 'black',
+    padding: 10,
+    margin: 5,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#000',
+    color: 'black',
+  },
+  text: {
+    color: 'white'
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    margin: 20,
+  },
+  message: {
+    fontSize: 28,
+    textAlign: 'center',
+  },
+  boxButton: {
+    backgroundColor: 'black',
+    padding: 10,
+    marginHorizontal: 20,
+    borderRadius: 5
+  },
+});
