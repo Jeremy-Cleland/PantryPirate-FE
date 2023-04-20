@@ -29,25 +29,25 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={({ navigation }) => ({
-            headerRight: () => (
-              <Pressable
-                title="Login"
-                style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  paddingVertical: 12,
-                  paddingHorizontal: 32,
-                  margin: 10,
-                  borderRadius: 4,
-                  elevation: 3,
-                  backgroundColor: 'black',
-                }}
+          // options={({ navigation }) => ({
+          //   headerRight: () => (
+          //     <Pressable
+          //       title="Login"
+          //       style={{
+          //         alignItems: 'center',
+          //         justifyContent: 'center',
+          //         paddingVertical: 12,
+          //         paddingHorizontal: 32,
+          //         margin: 10,
+          //         borderRadius: 4,
+          //         elevation: 3,
+          //         backgroundColor: 'black',
+          //       }}
 
-              />
-            ),
-          })
-          }
+          //     />
+          //   ),
+          // })
+          // }
         />
         <Stack.Screen name="Scan" component={Scan} />
         <Stack.Screen name="Item" component={Item} />

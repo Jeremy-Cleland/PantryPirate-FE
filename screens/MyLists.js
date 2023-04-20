@@ -41,7 +41,7 @@ export default function MyLists({ navigation, route }) {
         setShowLists(true);
         navigation.reset({
           index: 0,
-          routes: [{ name: 'Home' }, { name: 'Scan', params: { validUser } }],
+          routes: [{ name: 'Home', params: { validUser } }, { name: 'Scan', params: { validUser } }],
         });
       }, 3000);
 
@@ -56,7 +56,7 @@ export default function MyLists({ navigation, route }) {
   }
 
   const handleViewList = async (list) => {
-    navigation.navigate('ListDetails', { list });
+    navigation.navigate('ListDetails', { list, validUser });
   }
 
   const handleAddList = () => {
@@ -72,10 +72,10 @@ export default function MyLists({ navigation, route }) {
         <Text style={styles.title}>Select List</Text>
 
 
-        {message && 
-        <View style={styles.listContainer}>
-          <Text style={styles.message}>{message}</Text>
-        </View>
+        {message &&
+          <View style={styles.listContainer}>
+            <Text style={styles.message}>{message}</Text>
+          </View>
         }
 
 
@@ -135,17 +135,21 @@ export default function MyLists({ navigation, route }) {
                   >
                     <Text style={styles.text}>View Items</Text>
                   </Pressable>
-                  <Pressable
-                    style={({ pressed }) => [
-                      styles.boxButton,
-                      {
-                        backgroundColor: pressed ? 'gray' : 'black',
-                      },
-                    ]}
-                    onPress={() => handleEdit(list)}
-                  >
-                    <Text style={styles.text}>Edit Members</Text>
-                  </Pressable>
+                  {
+                    list.creator === validUser &&
+
+                    <Pressable
+                      style={({ pressed }) => [
+                        styles.boxButton,
+                        {
+                          backgroundColor: pressed ? 'gray' : 'black',
+                        },
+                      ]}
+                      onPress={() => handleEdit(list)}
+                    >
+                      <Text style={styles.text}>Edit Members</Text>
+                    </Pressable>
+                  }
                 </View>
               </View>
             );
