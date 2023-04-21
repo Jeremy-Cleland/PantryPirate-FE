@@ -1,6 +1,6 @@
-import { View, Text, Pressable, StyleSheet, StatusBar } from "react-native";
-import axios from "axios";
-import { useState } from "react";
+import { View, Text, Pressable, StyleSheet, ScrollView, StatusBar } from 'react-native'
+import axios from 'axios';
+import { useState } from 'react';
 
 export default function ({ navigation, route }) {
   const [pantry, setPantry] = useState(route.params.pantry);
@@ -11,11 +11,12 @@ export default function ({ navigation, route }) {
       const newPantry = [...pantry.items];
       newPantry.splice(index, 1);
       const updatedPantry = { ...pantry, items: newPantry };
-      axios
-        .put(
+
+      axios.put(
           `https://pantrypirate.onrender.com/pantry/${pantry._id}`,
           updatedPantry
         )
+
         .then(() => {
           setPantry(updatedPantry);
         })
@@ -32,7 +33,9 @@ export default function ({ navigation, route }) {
 
   return (
     <View style={styles.container}>
+
       <StatusBar barStyle="dark-content" backgroundColor="#EFEFE7" />
+      <ScrollView>
       {pantry.items.map((item, idx) => {
         return (
           <View key={`item-${idx}`} style={styles.itemContainer}>
@@ -59,6 +62,7 @@ export default function ({ navigation, route }) {
             >
               <Text style={styles.text}>Delete</Text>
             </Pressable>
+             </ScrollView>
           </View>
         );
       })}

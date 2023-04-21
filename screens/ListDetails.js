@@ -1,6 +1,6 @@
-import { View, Text, Pressable, StyleSheet, StatusBar } from "react-native";
-import axios from "axios";
-import { useState } from "react";
+import { View, Text, Pressable, StyleSheet, ScrollView, StatusBar } from 'react-native'
+import axios from 'axios';
+import { useState } from 'react';
 
 export default function ({ route }) {
   const [list, SetList] = useState(route.params.list);
@@ -12,8 +12,8 @@ export default function ({ route }) {
       const newList = [...list.items];
       newList.splice(index, 1);
       const updatedList = { ...list, items: newList };
-      axios
-        .put(`https://pantrypirate.onrender.com/list/${list._id}`, updatedList)
+
+      axios.put(`https://pantrypirate.onrender.com/list/${list._id}`, updatedList)
         .then(() => {
           SetList(updatedList);
         })
@@ -32,8 +32,9 @@ export default function ({ route }) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container}>  
       <StatusBar barStyle="dark-content" backgroundColor="#EFEFE7" />
+      <ScrollView>
       {list.items.map((item, idx) => {
         const isClicked = clickedItems.includes(item);
         return (
@@ -55,6 +56,7 @@ export default function ({ route }) {
             >
               <Text style={styles.deleteButtonText}>Delete</Text>
             </Pressable>
+            </ScrollView>
           </View>
         );
       })}
