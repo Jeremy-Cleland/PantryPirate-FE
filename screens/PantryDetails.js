@@ -1,7 +1,6 @@
-import { View, Text, Pressable, StyleSheet } from 'react-native'
-import axios from 'axios';
-import { useState } from 'react';
-
+import { View, Text, Pressable, StyleSheet, StatusBar } from "react-native";
+import axios from "axios";
+import { useState } from "react";
 
 export default function ({ navigation, route }) {
   const [pantry, setPantry] = useState(route.params.pantry);
@@ -12,32 +11,37 @@ export default function ({ navigation, route }) {
       const newPantry = [...pantry.items];
       newPantry.splice(index, 1);
       const updatedPantry = { ...pantry, items: newPantry };
-      axios.put(`https://pantrypirate.onrender.com/pantry/${pantry._id}`, updatedPantry)
-        .then(() =>{
+      axios
+        .put(
+          `https://pantrypirate.onrender.com/pantry/${pantry._id}`,
+          updatedPantry
+        )
+        .then(() => {
           setPantry(updatedPantry);
         })
-        .catch((err) => console.log(err))
+        .catch((err) => console.log(err));
     }
-  }
-
-  const handleAddItem = (item) => {
-    navigation.navigate('PantryToList', { validUser: route.params.validUser, item });
   };
 
+  const handleAddItem = (item) => {
+    navigation.navigate("PantryToList", {
+      validUser: route.params.validUser,
+      item,
+    });
+  };
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="#EFEFE7" />
       {pantry.items.map((item, idx) => {
         return (
           <View key={`item-${idx}`} style={styles.itemContainer}>
-            <Text style={styles.itemText}>
-              {item}
-            </Text>
+            <Text style={styles.itemText}>{item}</Text>
             <Pressable
               style={({ pressed }) => [
                 styles.button,
                 {
-                  backgroundColor: pressed ? 'gray' : 'black',
+                  backgroundColor: pressed ? "gray" : "black",
                 },
               ]}
               onPress={() => handleAddItem(item)}
@@ -48,7 +52,7 @@ export default function ({ navigation, route }) {
               style={({ pressed }) => [
                 styles.deleteButton,
                 {
-                  backgroundColor: pressed ? 'gray' : '#bb0a1e',
+                  backgroundColor: pressed ? "gray" : "#bb0a1e",
                 },
               ]}
               onPress={() => handleDeleteItem(item)}
@@ -64,29 +68,29 @@ export default function ({ navigation, route }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#EFEFE7',
+    backgroundColor: "#EFEFE7",
     flex: 1,
   },
   itemContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     margin: 5,
   },
   itemText: {
-    width: '60%',
+    width: "60%",
   },
   deleteButton: {
-    backgroundColor: '#bb0a1e',
+    backgroundColor: "#bb0a1e",
     padding: 10,
     borderRadius: 5,
   },
   button: {
-    backgroundColor: 'black',
+    backgroundColor: "black",
     padding: 10,
     borderRadius: 5,
   },
   text: {
-    color: 'white',
+    color: "white",
   },
 });
