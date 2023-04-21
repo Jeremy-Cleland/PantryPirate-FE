@@ -194,28 +194,23 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#000",
     color: "black",
-    fontFamily: "CormorantRegular",
   },
   text: {
     color: "white",
-    fontFamily: "CormorantRegular",
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     margin: 20,
-    fontFamily: "CormorantRegular",
   },
   message: {
     fontSize: 28,
     textAlign: "center",
-    fontFamily: "CormorantRegular",
   },
   boxButton: {
     backgroundColor: "black",
     padding: 10,
     marginHorizontal: 20,
     borderRadius: 5,
-    fontFamily: "CormorantRegular",
   },
 });
