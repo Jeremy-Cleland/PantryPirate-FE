@@ -14,7 +14,7 @@ export default function EditPantry({ navigation, route }) {
       await axios.put(`https://pantrypirate.onrender.com/pantry/${updatedPantry._id}`, updatedPantry);
       navigation.reset({
         index: 0,
-        routes: [{ name: 'Home', params: { validUser: route.params.validUser } }, { name: 'MyPantry', params: { validUser: route.params.validUser } }],
+        routes: [{ name: 'Home', params: { username: route.params.validUser } }, { name: 'MyPantry', params: { validUser: route.params.validUser } }],
       });
     } catch (error) {
       console.log('handleUpdateSubmit error----->>>', error)
