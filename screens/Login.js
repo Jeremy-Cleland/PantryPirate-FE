@@ -1,68 +1,71 @@
-import { TextInput, View, Pressable, StyleSheet, Text, Alert, ScrollView } from 'react-native';
-import { useState } from 'react';
-import axios from 'axios';
-
+import {
+  TextInput,
+  View,
+  Pressable,
+  StyleSheet,
+  Text,
+  Alert,
+  ScrollView,
+  StatusBar,
+} from "react-native";
+import { useState } from "react";
+import axios from "axios";
 
 // const bcrypt = require('bcryptjs');
 
-
-
 export default function Login({ navigation }) {
-
-
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [verifyPassword, setVerifyPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [verifyPassword, setVerifyPassword] = useState("");
   const [isSignUp, setIsSignUp] = useState(false);
 
   const handleUserSubmit = async () => {
-
-
     try {
-
       let userInfo = { email: username, password: password };
-      let axiosResponse = await axios.post('https://pantrypirate.onrender.com/user', userInfo);
+      let axiosResponse = await axios.post(
+        "https://pantrypirate.onrender.com/user",
+        userInfo
+      );
 
       if (password === axiosResponse.data[0].password) {
-        console.log('User is authenticated')
-        navigation.navigate('Home', { username });
-
+        console.log("User is authenticated");
+        navigation.navigate("Home", { username });
       } else {
-        console.log('User is not authenticated')
+        console.log("User is not authenticated");
       }
     } catch (error) {
       console.error(error);
     }
-
-  }
+  };
 
   const handleUserSignUp = async () => {
     if (password !== verifyPassword) {
-      Alert.alert('Passwords do not match');
-      console.log('Passwords do not match')
+      Alert.alert("Passwords do not match");
+      console.log("Passwords do not match");
       return;
     }
 
     try {
-
       let userInfo = { email: username, password: password };
-      let axiosResponse = await axios.post('https://pantrypirate.onrender.com/user', userInfo);
+      let axiosResponse = await axios.post(
+        "https://pantrypirate.onrender.com/user",
+        userInfo
+      );
 
       if (password === axiosResponse.data[0].password) {
-        console.log('User is authenticated')
-        navigation.navigate('Home', { username });
-
+        console.log("User is authenticated");
+        navigation.navigate("Home", { username });
       } else {
-        console.log('User is not authenticated')
+        console.log("User is not authenticated");
       }
     } catch (error) {
       console.error(error);
     }
-
-  }
+  };
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="#EFEFE7" />
       <ScrollView>
         <View style={styles.inputContainer}>
           <Text style={styles.inputHeader}>Username</Text>
@@ -87,7 +90,7 @@ export default function Login({ navigation }) {
             />
           </View>
         </View>
-        {isSignUp &&
+        {isSignUp && (
           <View style={styles.inputContainer}>
             <Text style={styles.inputHeader}>Confirm Password</Text>
             <View style={styles.textInputContainer}>
@@ -100,69 +103,65 @@ export default function Login({ navigation }) {
               />
             </View>
           </View>
-        }
-        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-          {
-            !isSignUp ?
-              <View>
-                <Pressable
-                  onPress={handleUserSubmit}
-                  style={({ pressed }) => [
-                    styles.button,
-                    {
-                      backgroundColor: pressed ? 'gray' : 'black',
-                    },
-                  ]}
-                >
-                  <Text style={styles.buttonText}>Login</Text>
-                </Pressable>
-                <Pressable
-                  onPress={() => setIsSignUp(true)}
-                  style={({ pressed }) => [
-                    styles.button,
-                    {
-                      backgroundColor: pressed ? 'gray' : 'black',
-                    },
-                  ]}
-                >
-                  <Text style={styles.buttonText}>Create Account</Text>
-                </Pressable>
-              </View>
-              :
+        )}
+        <View style={{ flexDirection: "row", justifyContent: "center" }}>
+          {!isSignUp ? (
+            <View>
               <Pressable
-                onPress={handleUserSignUp}
+                onPress={handleUserSubmit}
                 style={({ pressed }) => [
                   styles.button,
                   {
-                    backgroundColor: pressed ? 'gray' : 'black',
+                    backgroundColor: pressed ? "gray" : "black",
                   },
                 ]}
               >
-                <Text style={styles.buttonText}>Signup</Text>
+                <Text style={styles.buttonText}>Login</Text>
               </Pressable>
-
-          }
-
+              <Pressable
+                onPress={() => setIsSignUp(true)}
+                style={({ pressed }) => [
+                  styles.button,
+                  {
+                    backgroundColor: pressed ? "gray" : "black",
+                  },
+                ]}
+              >
+                <Text style={styles.buttonText}>Create Account</Text>
+              </Pressable>
+            </View>
+          ) : (
+            <Pressable
+              onPress={handleUserSignUp}
+              style={({ pressed }) => [
+                styles.button,
+                {
+                  backgroundColor: pressed ? "gray" : "black",
+                },
+              ]}
+            >
+              <Text style={styles.buttonText}>Signup</Text>
+            </Pressable>
+          )}
         </View>
       </ScrollView>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EFEFE7',
-
+    backgroundColor: "#EFEFE7",
   },
   textInputContainer: {
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: "black",
     margin: 10,
     padding: 10,
   },
   inputContainer: {
-    backgroundColor: 'black',
+    backgroundColor: "black",
     margin: 15,
     borderRadius: 15,
     borderWidth: 1,
@@ -170,22 +169,22 @@ const styles = StyleSheet.create({
   inputHeader: {
     marginLeft: 30,
     marginTop: 30,
-    color: 'white',
+    color: "white",
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: "bold",
   },
   input: {
-    backgroundColor: '#EFEFE7',
+    backgroundColor: "#EFEFE7",
     padding: 5,
   },
   button: {
-    backgroundColor: 'black',
+    backgroundColor: "black",
     padding: 10,
     margin: 10,
     borderRadius: 5,
   },
   buttonText: {
-    color: 'white',
-    textAlign: 'center',
+    color: "white",
+    textAlign: "center",
   },
 });
