@@ -90,7 +90,8 @@ export default function Item({ navigation, route }) {
             </Text>
           </View>
         ) : (
-          <Text>Loading...</Text>
+          
+          <Text>Item not found</Text>
         )}
       </View>
       {validUser !== "" && (
