@@ -8,14 +8,8 @@ import {
 } from "react-native";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useFonts } from "expo-font";
 
 export default function PantryToList({ navigation, route }) {
-  const [loaded] = useFonts({
-    CormorantBold: require("../assets/CormorantGaramond-B.ttf"),
-    CormorantRegular: require("../assets/CormorantGaramond-R.ttf"),
-    CormorantMedium: require("../assets/CormorantGaramond-M.ttf"),
-  });
   const [userList, setUserList] = useState(null);
   const [message, setMessage] = useState(null);
   const [showLists, setShowLists] = useState(true);
@@ -111,28 +105,23 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#000",
     color: "black",
-    fontFamily: "CormorantBold",
   },
   text: {
     color: "white",
-    fontFamily: "CormorantBold",
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     margin: 20,
-    fontFamily: "CormorantBold",
   },
   message: {
     fontSize: 28,
     textAlign: "center",
-    fontFamily: "CormorantBold",
   },
   boxButton: {
     backgroundColor: "black",
     padding: 10,
     marginHorizontal: 20,
     borderRadius: 5,
-    fontFamily: "CormorantBold",
   },
 });

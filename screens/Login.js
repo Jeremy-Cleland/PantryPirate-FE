@@ -10,16 +10,10 @@ import {
 } from "react-native";
 import { useState } from "react";
 import axios from "axios";
-import { useFonts } from "expo-font";
 
 // const bcrypt = require('bcryptjs');
 
 export default function Login({ navigation }) {
-  const [loaded] = useFonts({
-    CormorantBold: require("../assets/CormorantGaramond-B.ttf"),
-    CormorantRegular: require("../assets/CormorantGaramond-R.ttf"),
-    CormorantMedium: require("../assets/CormorantGaramond-M.ttf"),
-  });
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [verifyPassword, setVerifyPassword] = useState("");
@@ -165,7 +159,6 @@ const styles = StyleSheet.create({
     borderColor: "black",
     margin: 10,
     padding: 10,
-    fontFamily: "CormorantBold",
   },
   inputContainer: {
     backgroundColor: "black",
@@ -178,24 +171,20 @@ const styles = StyleSheet.create({
     marginTop: 30,
     color: "white",
     fontSize: 22,
-    fontFamily: "CormorantBold",
   },
   input: {
     backgroundColor: "#EFEFE7",
     padding: 5,
-    fontFamily: "CormorantBold",
   },
   button: {
     backgroundColor: "black",
     padding: 10,
     margin: 10,
     borderRadius: 5,
-    fontFamily: "CormorantBold",
   },
   buttonText: {
     color: "white",
     textAlign: "center",
     fontSize: 18,
-    fontFamily: "CormorantBold",
   },
 });
