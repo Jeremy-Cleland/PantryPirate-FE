@@ -41,7 +41,7 @@ export default function Scan({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.buttonContainer, styles.absolute]}>
+      <View style={styles.buttonContainer}>
         <Pressable
           style={({ pressed }) => [
             styles.boxButton,
@@ -72,7 +72,11 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 10,
+    margin: 10,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
   },
   text: {
     color: 'white',
@@ -86,13 +90,8 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     color: 'black',
   },
-  absolute: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-  },
   barcodeContainer: {
-    marginTop: 50,
+    marginTop: 100,
+    marginBottom: 100,
   },
 });

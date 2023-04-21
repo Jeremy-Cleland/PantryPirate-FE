@@ -12,6 +12,7 @@ import EditPantry from './screens/EditPantry';
 import AddPantry from './screens/AddPantry';
 import PantryDetails from './screens/PantryDetails';
 import MyPantry from './screens/MyPantry';
+import PantryToList from './screens/PantryToList';
 
 
 
@@ -43,7 +44,7 @@ export default function App() {
         <Stack.Screen name='EditPantry' component={EditPantry} />
         <Stack.Screen name='AddPantry' component={AddPantry} />
         <Stack.Screen name='PantryDetails' component={PantryDetails} />
-
+        <Stack.Screen name='PantryToList' component={PantryToList} />
       </Stack.Navigator>
     </NavigationContainer>
   );

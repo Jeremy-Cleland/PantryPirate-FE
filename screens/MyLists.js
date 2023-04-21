@@ -28,9 +28,7 @@ export default function MyLists({ navigation, route }) {
   const handleSelectList = async (list, item) => {
     try {
       const url = `https://pantrypirate.onrender.com/list/${list._id}`;
-      // console.log('url ------->>', url);
       const itemToUpdate = { items: [...list.items, item] }
-      // console.log('itemToUpdate ------->>', itemToUpdate);
 
       await axios.put(url, itemToUpdate);
 

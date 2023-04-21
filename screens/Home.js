@@ -176,6 +176,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     elevation: 3,
     backgroundColor: 'black',
+    margin: 10,
   },
   loginText: {
     color: 'white',
