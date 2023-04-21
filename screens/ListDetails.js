@@ -56,10 +56,10 @@ export default function ({ route }) {
             >
               <Text style={styles.deleteButtonText}>Delete</Text>
             </Pressable>
-            </ScrollView>
           </View>
         );
       })}
+      </ScrollView>
     </View>
   );
 }

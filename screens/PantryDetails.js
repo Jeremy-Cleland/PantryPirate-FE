@@ -62,10 +62,10 @@ export default function ({ navigation, route }) {
             >
               <Text style={styles.text}>Delete</Text>
             </Pressable>
-             </ScrollView>
           </View>
         );
       })}
+      </ScrollView>
     </View>
   );
 }
