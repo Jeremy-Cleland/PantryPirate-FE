@@ -7,9 +7,13 @@ import {
   StatusBar,
 } from "react-native";
 import { useState } from "react";
+import { useFonts } from "expo-font";
 import axios from "axios";
 
 export default function AddList({ navigation, route }) {
+  const [loaded] = useFonts({
+    Caveat: require("../assets/Caveat.ttf"),
+  });
   const [listName, setListName] = useState("");
   const [members, setMembers] = useState("");
 
@@ -99,10 +103,13 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
+    fontFamily: "Caveat",
   },
   input: {
     backgroundColor: "#EFEFE7",
     padding: 5,
+    fontFamily: "Caveat",
+    fontSize: 18,
   },
   button: {
     backgroundColor: "black",
@@ -113,5 +120,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     textAlign: "center",
+    fontFamily: "Caveat",
   },
 });
