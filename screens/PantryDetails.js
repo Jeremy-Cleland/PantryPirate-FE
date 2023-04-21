@@ -8,14 +8,8 @@ import {
 } from "react-native";
 import axios from "axios";
 import { useState } from "react";
-import { useFonts } from "expo-font";
 
 export default function ({ navigation, route }) {
-  const [loaded] = useFonts({
-    CormorantBold: require("../assets/CormorantGaramond-B.ttf"),
-    CormorantRegular: require("../assets/CormorantGaramond-R.ttf"),
-    CormorantMedium: require("../assets/CormorantGaramond-M.ttf"),
-  });
   const [pantry, setPantry] = useState(route.params.pantry);
 
   const handleDeleteItem = (item) => {
@@ -109,6 +103,5 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "white",
-    fontFamily: "CormorantBold",
   },
 });

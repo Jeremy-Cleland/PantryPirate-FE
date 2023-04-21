@@ -10,14 +10,8 @@ import {
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import image from "../assets/PantryPirateLogo.png";
-import { useFonts } from "expo-font";
 
 export default function Item({ navigation, route }) {
-  const [loaded] = useFonts({
-    CormorantBold: require("../assets/CormorantGaramond-B.ttf"),
-    CormorantRegular: require("../assets/CormorantGaramond-R.ttf"),
-    CormorantMedium: require("../assets/CormorantGaramond-M.ttf"),
-  });
   const { data, validUser } = route.params;
   const [response, setResponse] = useState({});
 
@@ -90,7 +84,6 @@ export default function Item({ navigation, route }) {
             </Text>
           </View>
         ) : (
-          
           <Text>Item not found</Text>
         )}
       </View>
@@ -155,13 +148,11 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     marginBottom: 16,
-    fontFamily: "CormorantBold",
   },
   buttonText: {
     color: "white",
     fontWeight: "bold",
     fontSize: 18,
-    fontFamily: "CormorantBold",
   },
   imageContainer: {
     justifyContent: "center",
