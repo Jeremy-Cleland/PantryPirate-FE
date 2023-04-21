@@ -10,7 +10,7 @@ export default function Item({ navigation, route }) {
   const handleScanButton = () => {
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Home', params: { validUser } }, { name: 'Scan', params: { validUser } }],
+      routes: [{ name: 'Home', params: { username: validUser } }, { name: 'Scan', params: { validUser } }],
     });
   }
 

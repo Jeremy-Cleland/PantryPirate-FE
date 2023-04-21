@@ -17,7 +17,7 @@ export default function AddPantry({ navigation, route }) {
 
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Home', params: { validUser } }, { name: 'MyPantry', params: { validUser } }],
+      routes: [{ name: 'Home', params: { username: validUser } }, { name: 'MyPantry', params: { validUser } }],
     });
   }
 

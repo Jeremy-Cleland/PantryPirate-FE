@@ -18,7 +18,7 @@ export default function AddList({ navigation, route }) {
 
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Home', params: { validUser } }, { name: 'MyLists', params: { validUser } }],
+      routes: [{ name: 'Home', params: { username: validUser } }, { name: 'MyLists', params: { validUser } }],
     });
 
 
