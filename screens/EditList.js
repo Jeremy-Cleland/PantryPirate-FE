@@ -8,8 +8,14 @@ import {
   StatusBar,
 } from "react-native";
 import axios from "axios";
+import { useFonts } from "expo-font";
 
 export default function EditList({ navigation, route }) {
+  const [loaded] = useFonts({
+    CormorantBold: require("../assets/CormorantGaramond-B.ttf"),
+    CormorantRegular: require("../assets/CormorantGaramond-R.ttf"),
+    CormorantMedium: require("../assets/CormorantGaramond-M.ttf"),
+  });
   const [listName, setListName] = useState(route.params.list.name);
   const [members, setMembers] = useState(
     route.params.list.members.join(" ").replace(route.params.validUser, "")

@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Pressable, StatusBar } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import { useFonts } from "expo-font";
 
 export default function Scan({ navigation, route }) {
+  const [loaded] = useFonts({
+    CormorantBold: require("../assets/CormorantGaramond-B.ttf"),
+    CormorantRegular: require("../assets/CormorantGaramond-R.ttf"),
+    CormorantMedium: require("../assets/CormorantGaramond-M.ttf"),
+  });
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
