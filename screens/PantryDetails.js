@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 
 export default function ({ navigation, route }) {
-  const [pantry, SetPantry] = useState(route.params.pantry);
+  const [pantry, setPantry] = useState(route.params.pantry);
 
   const handleDeleteItem = (item) => {
     const index = pantry.items.indexOf(item);
@@ -14,7 +14,7 @@ export default function ({ navigation, route }) {
       const updatedPantry = { ...pantry, items: newPantry };
       axios.put(`https://pantrypirate.onrender.com/pantry/${pantry._id}`, updatedPantry)
         .then(() =>{
-          SetPantry(updatedPantry);
+          setPantry(updatedPantry);
         })
         .catch((err) => console.log(err))
     }
