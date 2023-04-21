@@ -27,7 +27,7 @@ export default function EditPantry({ navigation, route }) {
 
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Home', params: { validUser: route.params.validUser } }, { name: 'MyPantry', params: { validUser: route.params.validUser } }],
+      routes: [{ name: 'Home', params: { username: route.params.validUser } }, { name: 'MyPantry', params: { validUser: route.params.validUser } }],
     });
   }
 
