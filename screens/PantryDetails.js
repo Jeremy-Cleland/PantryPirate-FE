@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState } from 'react';
 
 
-export default function ({ route }) {
+export default function ({ navigation, route }) {
   const [pantry, SetPantry] = useState(route.params.pantry);
 
   const handleDeleteItem = (item) => {
@@ -20,6 +20,11 @@ export default function ({ route }) {
     }
   }
 
+  const handleAddItem = (item) => {
+    navigation.navigate('PantryToList', { validUser: route.params.validUser, item });
+  };
+
+
   return (
     <View style={styles.container}>
       {pantry.items.map((item, idx) => {
@@ -30,6 +35,17 @@ export default function ({ route }) {
             </Text>
             <Pressable
               style={({ pressed }) => [
+                styles.button,
+                {
+                  backgroundColor: pressed ? 'gray' : 'black',
+                },
+              ]}
+              onPress={() => handleAddItem(item)}
+            >
+              <Text style={styles.text}>Add to List</Text>
+            </Pressable>
+            <Pressable
+              style={({ pressed }) => [
                 styles.deleteButton,
                 {
                   backgroundColor: pressed ? 'gray' : '#bb0a1e',
@@ -37,7 +53,7 @@ export default function ({ route }) {
               ]}
               onPress={() => handleDeleteItem(item)}
             >
-              <Text style={styles.deleteButtonText}>Delete</Text>
+              <Text style={styles.text}>Delete</Text>
             </Pressable>
           </View>
         );
@@ -65,7 +81,12 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
   },
-  deleteButtonText: {
+  button: {
+    backgroundColor: 'black',
+    padding: 10,
+    borderRadius: 5,
+  },
+  text: {
     color: 'white',
   },
 });
