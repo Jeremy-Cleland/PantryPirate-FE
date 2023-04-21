@@ -1,36 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Pressable } from 'react-native';
-import { BarCodeScanner } from 'expo-barcode-scanner';
+import React, { useState, useEffect } from "react";
+import { Text, View, StyleSheet, Pressable, StatusBar } from "react-native";
+import { BarCodeScanner } from "expo-barcode-scanner";
 
 export default function Scan({ navigation, route }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
- 
+
   const { validUser } = route.params;
-    console.log('validUser coming into scan ------->>', validUser)
+  console.log("validUser coming into scan ------->>", validUser);
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
+      setHasPermission(status === "granted");
     };
 
     getBarCodeScannerPermissions();
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
-      setScanned(true);
-      navigation.navigate('Item', { data, validUser });
-      
+    setScanned(true);
+    navigation.navigate("Item", { data, validUser });
   };
   const handleHome = () => {
-    console.log('validUser coming into handleHome ------->>', validUser)
+    console.log("validUser coming into handleHome ------->>", validUser);
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Home', params: { username: validUser } }],
+      routes: [{ name: "Home", params: { username: validUser } }],
     });
-    
-};
-
+  };
 
   if (hasPermission === null) {
     return <Text>Requesting for camera permission</Text>;
@@ -41,12 +38,13 @@ export default function Scan({ navigation, route }) {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="#EFEFE7" />
       <View style={styles.buttonContainer}>
         <Pressable
           style={({ pressed }) => [
             styles.boxButton,
             {
-              backgroundColor: pressed ? 'gray' : 'black',
+              backgroundColor: pressed ? "gray" : "black",
             },
           ]}
           onPress={handleHome}
@@ -66,29 +64,29 @@ export default function Scan({ navigation, route }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#EFEFE7',
+    backgroundColor: "#EFEFE7",
     flex: 1,
   },
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
     margin: 10,
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
   },
   text: {
-    color: 'white',
+    color: "white",
   },
   boxButton: {
-    backgroundColor: 'black',
+    backgroundColor: "black",
     padding: 10,
     margin: 5,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#000',
-    color: 'black',
+    borderColor: "#000",
+    color: "black",
   },
   barcodeContainer: {
     marginTop: 100,
