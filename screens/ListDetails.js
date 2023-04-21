@@ -1,4 +1,4 @@
-import { View, Text, Pressable, StyleSheet } from 'react-native'
+import { View, Text, Pressable, StyleSheet, ScrollView } from 'react-native'
 import axios from 'axios';
 import { useState } from 'react';
 
@@ -14,7 +14,7 @@ export default function ({ route }) {
       newList.splice(index, 1);
       const updatedList = { ...list, items: newList };
       axios.put(`https://pantrypirate.onrender.com/list/${list._id}`, updatedList)
-        .then(() =>{
+        .then(() => {
           SetList(updatedList);
         })
         .catch((err) => console.log(err))
@@ -31,30 +31,32 @@ export default function ({ route }) {
 
   return (
     <View style={styles.container}>
-      {list.items.map((item, idx) => {
-        const isClicked = clickedItems.includes(item);
-        return (
-          <View key={`item-${idx}`} style={styles.itemContainer}>
-            <Text
-              style={[styles.itemText, isClicked && styles.clickedText]}
-              onPress={() => handleItemClick(item)}
-            >
-              {item}
-            </Text>
-            <Pressable
-              style={({ pressed }) => [
-                styles.deleteButton,
-                {
-                  backgroundColor: pressed ? 'gray' : '#bb0a1e',
-                },
-              ]}
-              onPress={() => handleDeleteItem(item)}
-            >
-              <Text style={styles.deleteButtonText}>Delete</Text>
-            </Pressable>
-          </View>
-        );
-      })}
+      <ScrollView>
+        {list.items.map((item, idx) => {
+          const isClicked = clickedItems.includes(item);
+          return (
+            <View key={`item-${idx}`} style={styles.itemContainer}>
+              <Text
+                style={[styles.itemText, isClicked && styles.clickedText]}
+                onPress={() => handleItemClick(item)}
+              >
+                {item}
+              </Text>
+              <Pressable
+                style={({ pressed }) => [
+                  styles.deleteButton,
+                  {
+                    backgroundColor: pressed ? 'gray' : '#bb0a1e',
+                  },
+                ]}
+                onPress={() => handleDeleteItem(item)}
+              >
+                <Text style={styles.deleteButtonText}>Delete</Text>
+              </Pressable>
+            </View>
+          );
+        })}
+      </ScrollView>
     </View>
   );
 }

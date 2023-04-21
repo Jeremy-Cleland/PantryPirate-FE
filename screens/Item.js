@@ -66,7 +66,8 @@ export default function Item({ navigation, route }) {
             <Text style={styles.text}>Item: {response.Errors === undefined ? response.SearchResult.Items[0].ItemInfo.Title.DisplayValue : 'Not Found'}</Text>
           </View>
         ) : (
-          <Text>Loading...</Text>
+          
+          <Text>Item not found</Text>
         )}
       </View>
       {validUser !== '' && (
