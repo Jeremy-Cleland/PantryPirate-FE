@@ -146,7 +146,7 @@ export default function MyPantry({ navigation, route }) {
                         ]}
                         onPress={() => handleEdit(pantry)}
                       >
-                        <Text style={styles.text}>Edit Members</Text>
+                        <Text style={styles.text}>Settings</Text>
                       </Pressable>
                     )}
                   </View>

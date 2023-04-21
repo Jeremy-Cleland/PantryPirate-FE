@@ -148,7 +148,7 @@ export default function MyLists({ navigation, route }) {
                         ]}
                         onPress={() => handleEdit(list)}
                       >
-                        <Text style={styles.text}>Edit Members</Text>
+                        <Text style={styles.text}>Settings</Text>
                       </Pressable>
                     )}
                   </View>
