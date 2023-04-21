@@ -12,7 +12,9 @@ import axios from "axios";
 
 export default function AddList({ navigation, route }) {
   const [loaded] = useFonts({
-    Caveat: require("../assets/Caveat.ttf"),
+    CormorantBold: require("../assets/CormorantGaramond-B.ttf"),
+    CormorantRegular: require("../assets/CormorantGaramond-R.ttf"),
+    CormorantMedium: require("../assets/CormorantGaramond-M.ttf"),
   });
   const [listName, setListName] = useState("");
   const [members, setMembers] = useState("");
@@ -103,12 +105,12 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
-    fontFamily: "Caveat",
+    fontFamily: "CormorantRegular",
   },
   input: {
     backgroundColor: "#EFEFE7",
     padding: 5,
-    fontFamily: "Caveat",
+    fontFamily: "CormorantRegular",
     fontSize: 18,
   },
   button: {
@@ -120,6 +122,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     textAlign: "center",
-    fontFamily: "Caveat",
+    fontFamily: "CormorantRegular",
   },
 });

@@ -13,14 +13,10 @@ import AddPantry from "./screens/AddPantry";
 import PantryDetails from "./screens/PantryDetails";
 import MyPantry from "./screens/MyPantry";
 import PantryToList from "./screens/PantryToList";
-import { useFonts } from "expo-font";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [loaded] = useFonts({
-    Caveat: require("./assets/Caveat.ttf"),
-  });
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -28,7 +24,6 @@ export default function App() {
         screenOptions={{
           headerStyle: { backgroundColor: "#EFEFE7" },
           headerTintColor: "black",
-          fontFamily: "Caveat",
         }}
       >
         <Stack.Screen name="Home" component={HomeScreen} />

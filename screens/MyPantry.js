@@ -8,8 +8,14 @@ import {
 } from "react-native";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useFonts } from "expo-font";
 
 export default function MyPantry({ navigation, route }) {
+  const [loaded] = useFonts({
+    CormorantBold: require("../assets/CormorantGaramond-B.ttf"),
+    CormorantRegular: require("../assets/CormorantGaramond-R.ttf"),
+    CormorantMedium: require("../assets/CormorantGaramond-M.ttf"),
+  });
   const [message, setMessage] = useState(null);
   const [showPantries, setShowPantries] = useState(true);
   const [userPantry, setUserPantry] = useState(null);
@@ -183,6 +189,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
     textAlign: "center",
+    fontFamily: "CormorantBold",
   },
   button: {
     backgroundColor: "black",
@@ -192,18 +199,22 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#000",
     color: "black",
+    fontFamily: "CormorantBold",
   },
   text: {
     color: "white",
+    fontFamily: "CormorantBold",
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     margin: 20,
+    fontFamily: "CormorantBold",
   },
   message: {
     fontSize: 28,
     textAlign: "center",
+    fontFamily: "CormorantBold",
   },
   boxButton: {
     backgroundColor: "black",

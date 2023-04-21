@@ -8,8 +8,14 @@ import {
   StatusBar,
 } from "react-native";
 import axios from "axios";
+import { useFonts } from "expo-font";
 
 export default function EditPantry({ navigation, route }) {
+  const [loaded] = useFonts({
+    CormorantBold: require("../assets/CormorantGaramond-B.ttf"),
+    CormorantRegular: require("../assets/CormorantGaramond-R.ttf"),
+    CormorantMedium: require("../assets/CormorantGaramond-M.ttf"),
+  });
   const [pantryName, setPantryName] = useState(route.params.pantry.name);
   const [members, setMembers] = useState(
     route.params.pantry.members.join(" ").replace(route.params.validUser, "")
@@ -140,10 +146,12 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
+    fontFamily: "CormorantBold",
   },
   input: {
     backgroundColor: "#EFEFE7",
     padding: 5,
+    fontFamily: "CormorantBold",
   },
   button: {
     backgroundColor: "black",
@@ -156,9 +164,11 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 10,
     borderRadius: 5,
+    fontFamily: "CormorantBold",
   },
   buttonText: {
     color: "white",
     textAlign: "center",
+    fontFamily: "CormorantBold",
   },
 });

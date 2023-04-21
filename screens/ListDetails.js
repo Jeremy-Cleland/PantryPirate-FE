@@ -1,8 +1,14 @@
 import { View, Text, Pressable, StyleSheet, StatusBar } from "react-native";
 import axios from "axios";
 import { useState } from "react";
+import { useFonts } from "expo-font";
 
 export default function ({ route }) {
+  const [loaded] = useFonts({
+    CormorantBold: require("../assets/CormorantGaramond-B.ttf"),
+    CormorantRegular: require("../assets/CormorantGaramond-R.ttf"),
+    CormorantMedium: require("../assets/CormorantGaramond-M.ttf"),
+  });
   const [list, SetList] = useState(route.params.list);
   const [clickedItems, setClickedItems] = useState([]);
 
@@ -75,10 +81,12 @@ const styles = StyleSheet.create({
   },
   itemText: {
     width: "60%",
+    fontFamily: "CormorantBold",
   },
   clickedText: {
     textDecorationLine: "line-through",
     opacity: 0.5,
+    fontFamily: "CormorantBold",
   },
   deleteButton: {
     backgroundColor: "#bb0a1e",
@@ -87,5 +95,6 @@ const styles = StyleSheet.create({
   },
   deleteButtonText: {
     color: "white",
+    fontFamily: "CormorantBold",
   },
 });

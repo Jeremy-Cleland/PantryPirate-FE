@@ -10,8 +10,14 @@ import {
 import { useEffect, useState } from "react";
 import image from "../assets/PantryPirateLogo.png";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useFonts } from "expo-font";
 
 export default function HomeScreen({ navigation, route }) {
+  const [loaded] = useFonts({
+    CormorantBold: require("../assets/CormorantGaramond-B.ttf"),
+    CormorantRegular: require("../assets/CormorantGaramond-R.ttf"),
+    CormorantMedium: require("../assets/CormorantGaramond-M.ttf"),
+  });
   const [validUser, setValidUser] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -191,9 +197,12 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     elevation: 3,
     backgroundColor: "black",
+    fontFamily: "CormorantBold",
   },
   buttonText: {
     color: "white",
+    fontFamily: "CormorantBold",
+    fontSize: 16,
   },
   login: {
     position: "absolute",
@@ -209,8 +218,11 @@ const styles = StyleSheet.create({
     elevation: 3,
     backgroundColor: "black",
     margin: 10,
+    fontFamily: "CormorantBold",
   },
   loginText: {
     color: "white",
+    fontFamily: "CormorantBold",
+    fontSize: 18,
   },
 });
