@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Pressable, Image } from 'react-native';
+import { Text, View, StyleSheet, Pressable, Image, Linking } from 'react-native';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import image from '../assets/PantryPirateLogo.png';
@@ -13,6 +13,16 @@ export default function Item({ navigation, route }) {
       routes: [{ name: 'Home', params: { username: validUser } }, { name: 'Scan', params: { validUser } }],
     });
   }
+
+  const handleAmazonButton = () => {
+    const url = response.SearchResult.Items[0].DetailPageURL;
+    Linking.openURL(url);
+  };
+
+  const handleGoogleButton = () => {
+    const url = `https://www.google.com/search?q=${data}&tbm=shop`;
+    Linking.openURL(url);
+  };
 
   const handleListButton = () => {
     navigation.navigate('MyLists', { response, validUser });
@@ -60,7 +70,7 @@ export default function Item({ navigation, route }) {
         )}
       </View>
       {validUser !== '' && (
-        <View style={styles.container}>
+        <View style={styles.buttonRowContainer}>
           <View style={styles.buttonContainer}>
             <Pressable style={styles.button} onPress={handleListButton}>
               <Text style={styles.buttonText}>Add to List</Text>
@@ -73,45 +83,62 @@ export default function Item({ navigation, route }) {
           </View>
         </View>
       )}
+      <View style={styles.buttonRowContainer}>
+        <View style={styles.buttonContainer}>
+          <Pressable style={styles.button} onPress={handleAmazonButton}>
+            <Text style={styles.buttonText}>Find on Amazon</Text>
+          </Pressable>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Pressable style={styles.button} onPress={handleGoogleButton}>
+            <Text style={styles.buttonText}>Find on Google</Text>
+          </Pressable>
+        </View>
+      </View>
     </View>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#EFEFE7'
-  },
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  image: {
-    width: 250,
-    height: 250,
-    resizeMode: 'center',
-  },
-  buttonContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingBottom: 32,
-  },
-  button: {
-    backgroundColor: 'black',
-    padding: 16,
-    borderRadius: 8,
-    marginBottom: 16,
-  },
-  buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-  imageContainer: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-});
+      }
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#EFEFE7'
+    },
+    center: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    image: {
+      width: 250,
+      height: 250,
+      resizeMode: 'center',
+    },
+    buttonRowContainer: {
+      flexDirection: 'row',
+      paddingBottom: 32,
+    },
+    buttonContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: 8,
+    },
+    button: {
+      backgroundColor: 'black',
+      padding: 16,
+      borderRadius: 8,
+      marginBottom: 16,
+    },
+    buttonText: {
+      color: 'white',
+      fontWeight: 'bold',
+      fontSize: 18,
+    },
+    imageContainer: {
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+  });
+  
