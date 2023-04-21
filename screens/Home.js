@@ -62,6 +62,7 @@ export default function HomeScreen({ navigation, route }) {
           backgroundColor: "#EFEFE7",
         }}
       >
+        <StatusBar barStyle="dark-content" backgroundColor="#EFEFE7" />
         <Pressable
           style={({ pressed }) => [
             styles.login,
