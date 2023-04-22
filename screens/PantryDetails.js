@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 import { useState } from "react";
 
-export default function ({ navigation, route }) {
+export default function PantryDetails({ navigation, route }) {
   const [pantry, setPantry] = useState(route.params.pantry);
 
   const handleDeleteItem = (item) => {
@@ -28,7 +28,7 @@ export default function ({ navigation, route }) {
         .then(() => {
           setPantry(updatedPantry);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.error(err));
     }
   };
 

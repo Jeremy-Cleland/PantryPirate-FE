@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   View,
   Pressable,
@@ -17,7 +17,7 @@ export default function EditPantry({ navigation, route }) {
 
   const handleUpdateSubmit = async () => {
     try {
-      let membersArr = members.split(" ").filter((member) => member !== "");
+      const membersArr = members.split(" ").filter((member) => member !== "");
       const updatedPantry = {
         ...route.params.pantry,
         name: pantryName,
@@ -34,9 +34,7 @@ export default function EditPantry({ navigation, route }) {
           { name: "MyPantry", params: { validUser: route.params.validUser } },
         ],
       });
-    } catch (error) {
-      console.log("handleUpdateSubmit error----->>>", error);
-    }
+    } catch (error) {}
   };
 
   const handleDeleteSubmit = async () => {

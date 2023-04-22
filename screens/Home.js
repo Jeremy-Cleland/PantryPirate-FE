@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { useEffect, useState } from "react";
 import image from "../assets/PantryPirateLogo.png";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen({ navigation, route }) {
   const [validUser, setValidUser] = useState("");
@@ -18,13 +17,11 @@ export default function HomeScreen({ navigation, route }) {
   useEffect(() => {
     if (route.params) {
       const { username } = route.params;
-      console.log("username coming into home screen ------->>", username);
+
       setValidUser(username);
       setIsLoggedIn(true);
     }
   }, [route.params]);
-
-  // console.log('validUser ------->>', validUser);
 
   const handleLoginButton = () => {
     // setIsLoggedIn(true);
@@ -214,6 +211,5 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: "white",
-    
   },
 });

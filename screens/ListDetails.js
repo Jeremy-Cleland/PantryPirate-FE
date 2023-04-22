@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 import { useState } from "react";
 
-export default function ({ route }) {
+export default function ListDetails({ route }) {
   const [list, SetList] = useState(route.params.list);
   const [clickedItems, setClickedItems] = useState([]);
 
@@ -25,7 +25,7 @@ export default function ({ route }) {
         .then(() => {
           SetList(updatedList);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.error(err));
     }
   };
 

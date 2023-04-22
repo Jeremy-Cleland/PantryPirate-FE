@@ -17,13 +17,13 @@ export default function AddList({ navigation, route }) {
   const { validUser } = route.params;
 
   const handleListSubmit = () => {
-    let membersArr = members.split(" ");
+    const membersArr = members.split(" ");
     const list = {
       creator: validUser,
       name: listName,
       members: [...membersArr, validUser],
     };
-    console.log("list ------->>", list);
+
     axios.post("https://pantrypirate.onrender.com/list", list);
 
     navigation.reset({

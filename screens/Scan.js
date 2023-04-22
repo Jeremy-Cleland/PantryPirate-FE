@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Pressable, StatusBar } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
@@ -7,7 +7,6 @@ export default function Scan({ navigation, route }) {
   const [scanned, setScanned] = useState(false);
 
   const { validUser } = route.params;
-  console.log("validUser coming into scan ------->>", validUser);
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -17,12 +16,11 @@ export default function Scan({ navigation, route }) {
     getBarCodeScannerPermissions();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = ({ data }) => {
     setScanned(true);
     navigation.navigate("Item", { data, validUser });
   };
   const handleHome = () => {
-    console.log("validUser coming into handleHome ------->>", validUser);
     navigation.reset({
       index: 0,
       routes: [{ name: "Home", params: { username: validUser } }],

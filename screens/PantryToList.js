@@ -7,7 +7,7 @@ import {
   StatusBar,
 } from "react-native";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function PantryToList({ navigation, route }) {
   const [userList, setUserList] = useState(null);
@@ -22,7 +22,7 @@ export default function PantryToList({ navigation, route }) {
       );
       setUserList(userListFromDB.data);
     } catch (error) {
-      console.log("List Screen error----->>>", error);
+      console.error(error);
     }
   };
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function PantryToList({ navigation, route }) {
         navigation.goBack();
       }, 3000);
     } catch (error) {
-      console.log("handleSelectList error----->>>", error);
+      console.error(error);
     }
   };
 

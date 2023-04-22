@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   View,
   Pressable,
@@ -17,7 +17,7 @@ export default function EditList({ navigation, route }) {
 
   const handleUpdateSubmit = async () => {
     try {
-      let membersArr = members.split(" ").filter((member) => member !== "");
+      const membersArr = members.split(" ").filter((member) => member !== "");
       const updatedList = {
         ...route.params.list,
         name: listName,
@@ -35,7 +35,7 @@ export default function EditList({ navigation, route }) {
         ],
       });
     } catch (error) {
-      console.log("handleUpdateSubmit error----->>>", error);
+      console.error(error);
     }
   };
 

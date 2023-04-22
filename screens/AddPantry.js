@@ -16,13 +16,13 @@ export default function AddPantry({ navigation, route }) {
   const { validUser } = route.params;
 
   const handlePantrySubmit = () => {
-    let membersArr = members.split(" ");
+    const membersArr = members.split(" ");
     const pantry = {
       creator: validUser,
       name: pantryName,
       members: [...membersArr, validUser],
     };
-    console.log("pantry ------->>", pantry);
+
     axios.post("https://pantrypirate.onrender.com/pantry", pantry);
 
     navigation.reset({

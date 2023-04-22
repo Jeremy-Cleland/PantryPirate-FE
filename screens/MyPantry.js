@@ -7,7 +7,7 @@ import {
   StatusBar,
 } from "react-native";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function MyPantry({ navigation, route }) {
   const [message, setMessage] = useState(null);
@@ -22,7 +22,7 @@ export default function MyPantry({ navigation, route }) {
       );
       setUserPantry(userPantryFromDB.data);
     } catch (error) {
-      console.log("Pantry Screen error----->>>", error);
+      console.error(error);
     }
   };
   useEffect(() => {
@@ -32,9 +32,8 @@ export default function MyPantry({ navigation, route }) {
   const handleSelectPantry = async (pantry, item) => {
     try {
       const url = `https://pantrypirate.onrender.com/pantry/${pantry._id}`;
-      // console.log('url ------->>', url);
+
       const itemToUpdate = { items: [...pantry.items, item] };
-      // console.log('itemToUpdate ------->>', itemToUpdate);
 
       await axios.put(url, itemToUpdate);
 
@@ -49,7 +48,7 @@ export default function MyPantry({ navigation, route }) {
         });
       }, 3000);
     } catch (error) {
-      console.log("handleSelectPantry error----->>>", error);
+      console.error(error);
     }
   };
 
@@ -57,7 +56,7 @@ export default function MyPantry({ navigation, route }) {
     navigation.navigate("EditPantry", { pantry, validUser });
   };
 
-  const handleViewPantry = async (pantry) => {
+  const handleViewPantry = (pantry) => {
     navigation.navigate("PantryDetails", { pantry, validUser });
   };
 

@@ -8,7 +8,7 @@ import {
   StatusBar,
 } from "react-native";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import image from "../assets/PantryPirateLogo.png";
 
 export default function Item({ navigation, route }) {
@@ -50,7 +50,7 @@ export default function Item({ navigation, route }) {
         );
         setResponse(axiosResponse.data);
       } catch (error) {
-        console.log("error----->>>", error);
+        console.error(error);
       }
     };
 

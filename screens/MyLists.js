@@ -7,7 +7,7 @@ import {
   StatusBar,
 } from "react-native";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function MyLists({ navigation, route }) {
   const [userList, setUserList] = useState(null);
@@ -15,7 +15,6 @@ export default function MyLists({ navigation, route }) {
   const [showLists, setShowLists] = useState(true);
 
   const { validUser } = route.params;
-  console.log("validUser coming into my list ------->>", validUser);
 
   const getUserLists = async () => {
     try {
@@ -23,9 +22,8 @@ export default function MyLists({ navigation, route }) {
         `https://pantrypirate.onrender.com/list/${validUser}`
       );
       setUserList(userListFromDB.data);
-      // console.log('userList ------->>', userListFromDB);
     } catch (error) {
-      console.log("List Screen error----->>>", error);
+      console.error(error);
     }
   };
   useEffect(() => {
@@ -44,14 +42,13 @@ export default function MyLists({ navigation, route }) {
       setTimeout(() => {
         setMessage(null);
         setShowLists(true);
-        console.log("validUser ------->>", validUser);
         navigation.reset({
           index: 0,
           routes: [{ name: "Scan", params: { validUser } }],
         });
       }, 3000);
     } catch (error) {
-      console.log("handleSelectList error----->>>", error);
+      console.error(error);
     }
   };
 
@@ -59,7 +56,7 @@ export default function MyLists({ navigation, route }) {
     navigation.navigate("EditList", { list, validUser });
   };
 
-  const handleViewList = async (list) => {
+  const handleViewList = (list) => {
     navigation.navigate("ListDetails", { list, validUser });
   };
 

@@ -21,17 +21,15 @@ export default function Login({ navigation }) {
 
   const handleUserSubmit = async () => {
     try {
-      let userInfo = { email: username, password: password };
+      const userInfo = { email: username, password };
       let axiosResponse = await axios.post(
         "https://pantrypirate.onrender.com/user",
         userInfo
       );
 
       if (password === axiosResponse.data[0].password) {
-        console.log("User is authenticated");
         navigation.navigate("Home", { username });
       } else {
-        console.log("User is not authenticated");
       }
     } catch (error) {
       console.error(error);
@@ -41,22 +39,20 @@ export default function Login({ navigation }) {
   const handleUserSignUp = async () => {
     if (password !== verifyPassword) {
       Alert.alert("Passwords do not match");
-      console.log("Passwords do not match");
+      console.error(error);
       return;
     }
 
     try {
-      let userInfo = { email: username, password: password };
+      let userInfo = { email: username, password };
       let axiosResponse = await axios.post(
         "https://pantrypirate.onrender.com/user",
         userInfo
       );
 
       if (password === axiosResponse.data[0].password) {
-        console.log("User is authenticated");
         navigation.navigate("Home", { username });
       } else {
-        console.log("User is not authenticated");
       }
     } catch (error) {
       console.error(error);
