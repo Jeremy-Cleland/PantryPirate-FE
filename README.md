@@ -1,6 +1,12 @@
 # Pantry Pirate
 
-## Authors: Adrienne Frey, Joe Davitt, Jordan Covington, Jeremy Cleland, Steve Gant
+## Team Members: 
+
+Adrienne Frey, Joe Davitt, Jordan Covington, Jeremy Cleland, Steve Gant
+
+## Web Application
+
+Utilizing the Amazon API, we created a mobile application that allows users to scan barcodes and retrieve the item's data to then store either in a shopping list or in their personal pantry. Need to have a shared shopping list or pantry? Our app allows users to add members to either, making it possible to know both what is currently in the  pantry at home while out shopping and also the list of items still  needed.
 
 ### User Stories
 
@@ -14,13 +20,32 @@
 
 5. As a user, I want a mobile application that allows me to create groups that are able to share shopping lists.
 
-### Features
+## Tools Used
+
+React Native, MongoDB, Expo, Axios, Expo Auth, Expo Barecode Scanner, Amazon API, VS Code
+
+## How to Run
+
+1. Clone the repo
+2. `npm install`
+3. `npx expo start`
+4. Scan QR code with your phone or use an emulator
 
 
-### Testing
+## We are deployed on
 
-### UML
+Render
+
+## Documentation
+
+#### UML
+
+![UML](assets/PantryPirate_UML.png)
+
+#### Wireframe
 
 ![WireFrame](/assets/pricefinderWF.png)
-![UML](assets/PantryPirate_UML.png)
+
+#### Schema
+
 ![Schema](assets/PantryPirateSchema.PNG)
