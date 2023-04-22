@@ -86,7 +86,7 @@ export default function Login({ navigation }) {
               value={password}
               onChangeText={setPassword}
               style={styles.input}
-              secureTextEntry={true}
+              secureTextEntry
             />
           </View>
         </View>
@@ -99,7 +99,7 @@ export default function Login({ navigation }) {
                 value={verifyPassword}
                 onChangeText={setVerifyPassword}
                 style={styles.input}
-                secureTextEntry={true}
+                secureTextEntry
               />
             </View>
           </View>
